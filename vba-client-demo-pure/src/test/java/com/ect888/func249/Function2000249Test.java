@@ -22,7 +22,7 @@ import com.ect888.http.PoolClient;
  * 行驶证查询 同步
  * 
  * 
- * @author thinkive_yb
+ * @author fanyj
  *
  */
 public class Function2000249Test {
@@ -31,6 +31,11 @@ static final String FUNC_NO="2000249";
 	
 	/**
 	 * 车牌省份
+	 * 
+	 * 不参与签名
+	 * 
+	 * 以url编码再base64编码形式post发送
+	 * 
 	 */
 	String province = "苏";
 
@@ -45,7 +50,7 @@ static final String FUNC_NO="2000249";
 	 * 
 	 * 签名的时候车牌号(即使值为空也需要如此处理)需要利用会话密钥进行AES加密
 	 */
-	String platenumber="f80007";
+	String platenumber="f80001";
 	
 	/**
 	 * 号牌种类
