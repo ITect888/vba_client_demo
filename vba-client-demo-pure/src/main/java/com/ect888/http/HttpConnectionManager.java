@@ -7,7 +7,6 @@ import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.concurrent.TimeUnit;
 
-import javax.annotation.PostConstruct;
 import javax.net.ssl.SSLContext;
 
 import org.apache.commons.logging.Log;
@@ -48,7 +47,11 @@ public class HttpConnectionManager {
 	private Log log = LogFactory.getLog(HttpConnectionManager.class);
 	
 	private HttpConnectionManager() {
-		
+		try {
+			init();
+		} catch (KeyManagementException |NoSuchAlgorithmException|KeyStoreException e) {
+			log.error("",e);
+		}
 	}
 	
 	private static class Holder{
@@ -134,7 +137,6 @@ that have been idle over a given period of time.
      * @throws NoSuchAlgorithmException 
      * @throws KeyManagementException 
      */
-    @PostConstruct
     public void init() throws KeyManagementException, NoSuchAlgorithmException, KeyStoreException {
     	
     	log.info("初始化...maxTotal="+configHttp.getMaxTotal()+",defaultMaxPerRoute="+configHttp.getDefaultMaxPerRoute());
