@@ -1,4 +1,4 @@
-package com.ect888.func257;
+package com.ect888.func262;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,48 +15,42 @@ import com.alibaba.fastjson.JSON;
 import com.ect888.bus.FunctionCommon;
 import com.ect888.bus.impl.FunctionCommonImpl;
 import com.ect888.config.Config;
-import com.ect888.func261.Function2000261Test;
 import com.ect888.http.PoolClient;
 
 /**
- * 
- * 身份证有效期核查
+ * 2000262证通港澳通行证核查服务
+ * 示例代码
  * 
  * @author fanyj
  *
  */
-public class Function2000257Test {
+public class Function2000262Test {
 	
-	static final String FUNC_NO="2000257";
+	static final String FUNC_NO="2000262";
 	
 	/**
-	 * 有效期起始日期
+	 * 有效期止
 	 * 
-	 * 不参与签名
-	 * 
-	 * 格式为yyyymmdd
-	 * 	 
+	 * 格式YYYYMMDD   例：20190222
 	 */
-	String validfrom="20180327";
-	/**
-	 * 有效期截止日期
-	 * 
-	 * 格式为yyyymmdd，
-	 * 若为长期有效身份证，截止日期填00000000
-	 * 
-	 * 不参与签名
-	 */
-	String validto="20380327";
+	String validity="20190222";
 	
 	/**
-	 * 姓名
+	 * 出生日期
+	 * 
+	 * 格式YYYYMMDD   例：20190222
+	 */
+	String birthday="20190222";
+	
+	/**
+	 * 证件上中文名
 	 * 必填，姓名入参校验：全是中文或者·（中间不能有空格）
 	 * 
 	 * 不参与签名
 	 */
-	String usernm="姓名";
+	String usernm="证件上中文名";
 	/**
-	 * 证件号码	
+	 * 证件上号码
 	 * 必填，身份号入参校验：是15或18位，最后一位校验位正确
 	 * 签名的时候身份证号(即使值为空也需要如此处理)需要利用会话密钥进行AES加密
 	 * post传参数时的身份证号要进行以下处理，
@@ -65,7 +59,7 @@ public class Function2000257Test {
 	 * [c],base64（[b]中字符串） 
 	 * 
 	 */
-	String certseq="341227198912173710";
+	String passport="341227198912173710";
 	
 	/**
 	 * 来源渠道，填固定值“0”
@@ -94,7 +88,7 @@ public class Function2000257Test {
 	 * 
 	 * 参与签名
 	 */
-	String biztypdesc="身份证有效期核查";
+	String biztypdesc="港澳通行证核查";
 	/**
 	 * 时间戳
 	 * 
@@ -119,16 +113,21 @@ public class Function2000257Test {
 	 * 
 	 * 将入参，按照http post上送和签名规则，放入map内
 	 * 
-	 * 上送参数（biztyp,biztypdesc,certseq,placeid,ptyacct,ptycd,sourcechnl,timestamp,usernm,validfrom,validto,funcNo,sign(会话密钥)）
-	 * ，传上述参数时的身份证号要进行以下处理，步骤为：[a]，用会话密钥加密(AES加密方法);[b].URLEncoder.encode（[a]中加密串）;[c],base64（[b]中字符串）  ,传上述参数的时候没有顺序要求的  
+	 * 上送参数（sourcechnl,biztyp，biztypdesc，passport,birthday ,validity,，usernm, placeid，ptyacct，ptycd，timestamp，funcNo，sign(会话密钥)）
+	 * ，传上述参数时的通行证号passport要进行以下处理，步骤为：[a]，用会话密钥加密(AES加密方法);[b].URLEncoder.encode（[a]中加密串）;[c],base64（[b]中字符串） 。传上述参数的时候没有顺序要求  
 	 * 
-	 * 签名过程：对参数（biztyp,biztypdesc,certseq,placeid,ptyacct,ptycd,sourcechnl,timestamp,key(会话密钥)），其中key前面的是按照字母排序的，key则是要最后附加上去。其中在签名的时候身份证号要利用会话密钥进行AES加密。签名过程生成签名密钥sign 
+	 * 签名过程：参数（sourcechnl，biztyp，biztypdesc，passport,birthday ,validity,placeid，ptyacct，ptycd，timestamp，key(会话密钥)）
+	 * ，其中key前面的是按照字母排序的，key则是要最后附加上去。其中在签名的时候通行证号passport需要用会话密钥进行AES加密。签名过程生成签名密钥sign  
+	 * 
 	 * @return 将入参，按照http post上送和签名规则，放入map内
 	 */
 	private Map<String, String> buildParams() {
 		Map<String,String> params=new HashMap<String,String>();
 		
-		params.put(FunctionCommon.TO_AES_TO_URL_TO_BASE64_HEAD+"certseq", certseq);
+		params.put(FunctionCommon.TO_AES_TO_URL_TO_BASE64_HEAD+"passport", passport);
+		
+		params.put(FunctionCommon.TO_SIGN_HEAD+"validity",validity);
+		params.put(FunctionCommon.TO_SIGN_HEAD+"birthday",birthday);
 		
 		params.put(FunctionCommon.TO_SIGN_HEAD+"timestamp", timestamp);
 		params.put(FunctionCommon.TO_SIGN_HEAD+"biztypdesc", biztypdesc);
@@ -140,8 +139,6 @@ public class Function2000257Test {
 		params.put(FunctionCommon.TO_SIGN_HEAD+"ptycd",config.getPtycd());
 		
 		params.put("usernm", usernm);
-		params.put("validfrom", validfrom);
-		params.put("validto", validto);
 		params.put("funcNo", FUNC_NO);
 		
 		return params;
@@ -153,7 +150,7 @@ public class Function2000257Test {
 	 * @param result
 	 */
 	private void processResult(String result) {
-		 Json257 json=JSON.parseObject(result,Json257.class);
+		 Json262 json=JSON.parseObject(result,Json262.class);
 		 
 		 if(null==json) {
 			 log.error("返回报文解析为null,配置为"+JSON.toJSONString(config));
@@ -164,7 +161,7 @@ public class Function2000257Test {
 			 if(json.getResults().isEmpty()||null==json.getResults().get(0))//异常，系统级调用成功，却无结果，健壮性考虑，留此分支,联系服务端
 				 throw new IllegalStateException("异常，系统级调用成功，却无结果，健壮性考虑，留此分支,联系服务端");
 			 
-			 Result257 re=json.getResults().get(0);
+			 Result262 re=json.getResults().get(0);
 			 String status=re.getStatus();
 			 if("00".equals(status)) {//订单成功结束,开始业务处理，此处示例打印主要业务应答结果
 				 log.info("订单成功结束");
@@ -191,7 +188,7 @@ public class Function2000257Test {
 	
 	private FunctionCommonImpl funcCommon=FunctionCommonImpl.getInstance();
 	
-	private static Log log = LogFactory.getLog(Function2000261Test.class);
+	private static Log log = LogFactory.getLog(Function2000262Test.class);
 	
 	@Test
 	public void test() {
@@ -211,5 +208,4 @@ public class Function2000257Test {
 		String log4jFileStr = "log4j.properties";
 		PropertyConfigurator.configure(log4jFileStr);
 	}
-	
 }
