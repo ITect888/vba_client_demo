@@ -8,7 +8,7 @@ VBA接口客户端示例代码
 
 1. vba-client-demo-pure
 
-   框架和构建工具依赖纯eclipse工程jdk版本兼容1.6
+   VBA接口客户端示例代码。是框架和构建工具无依赖的纯eclipse工程。jdk版本兼容1.6。
 
 2. JavaKey2CSharpKey
 
