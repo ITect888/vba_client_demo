@@ -1,7 +1,8 @@
 package com.ect888.func249;
 
 /**
- * 
+ * 结果数据
+ * 对应json
  * {
 			"retirementYear": "",
 			"doors": "四门",
