@@ -1,4 +1,4 @@
-package com.thinkive.base;
+package com.ect888.util;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
