@@ -272,7 +272,7 @@ public class PoolClient {
 		
 		log.debug("apiUrl="+apiUrl);
 		log.debug("postEntity="+httpPost.getEntity());
-		log.debug("postStr:"+EntityUtils.toString(httpPost.getEntity()));
+		log.info("postStr:"+EntityUtils.toString(httpPost.getEntity()));
 		
 		String json=tryExecute(httpPost);
 		

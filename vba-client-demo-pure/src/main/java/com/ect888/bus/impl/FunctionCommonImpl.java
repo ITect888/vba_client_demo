@@ -16,8 +16,8 @@ import org.apache.http.client.ClientProtocolException;
 import com.ect888.bus.FunctionCommon;
 import com.ect888.config.Config;
 import com.ect888.http.PoolClient;
-import com.thinkive.base.SignatureUtil;
-import com.thinkive.base.util.security.AES;
+import com.ect888.util.AES;
+import com.ect888.util.SignatureUtil;
 
 import net.coobird.thumbnailator.Thumbnails;
 

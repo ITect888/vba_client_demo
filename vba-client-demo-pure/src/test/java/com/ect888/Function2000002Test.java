@@ -13,7 +13,7 @@ import com.alibaba.fastjson.JSON;
 import com.ect888.bean.JsonCommon;
 import com.ect888.config.Config;
 import com.ect888.http.PoolClient;
-import com.thinkive.base.KeyHelp;
+import com.ect888.util.KeyHelp;
 
 /**
  * 描述: 修改交易会话密钥接口

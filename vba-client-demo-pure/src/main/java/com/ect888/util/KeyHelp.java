@@ -1,4 +1,4 @@
-package com.thinkive.base;
+package com.ect888.util;
 
 import java.net.URLEncoder;
 import java.security.Key;
@@ -6,8 +6,6 @@ import java.security.KeyFactory;
 import java.security.spec.X509EncodedKeySpec;
 
 import javax.crypto.Cipher;
-
-import com.thinkive.base.util.Base64;
 
 /**
  * @描述 公钥加密
