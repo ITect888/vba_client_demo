@@ -5,13 +5,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.client.ClientProtocolException;
+import org.bouncycastle.util.encoders.Base64;
 
 import com.ect888.bus.FunctionCommon;
 import com.ect888.config.Config;
@@ -78,7 +78,7 @@ public class FunctionCommonImpl  implements FunctionCommon{
 				String v2aes=aes.encrypt(v, ENCODE_UTF8);
 				String v2Base64UrlEnAes=null;
 				try {
-					v2Base64UrlEnAes = Base64.getEncoder().encodeToString((URLEncoder.encode(v2aes, ENCODE_UTF8)).getBytes(ENCODE_UTF8));
+					v2Base64UrlEnAes = Base64.toBase64String((URLEncoder.encode(v2aes, ENCODE_UTF8)).getBytes(ENCODE_UTF8));
 				} catch (UnsupportedEncodingException e) {
 					log.error("",e);
 				}
@@ -93,7 +93,7 @@ public class FunctionCommonImpl  implements FunctionCommon{
 				
 				byte[] bytes=readPic4Bytes(new File(v));
 				
-				String base64=Base64.getEncoder().encodeToString(bytes);
+				String base64=Base64.toBase64String(bytes);
 				
 				map2Post.put(key, base64);
 			}else if(k.startsWith(TO_URL_TO_BASE64_HEAD)) {//4  toUrl_toBase64_开头的
@@ -102,7 +102,7 @@ public class FunctionCommonImpl  implements FunctionCommon{
 				
 				String urlEn=URLEncoder.encode(v, ENCODE_UTF8);
 				
-				String base64=Base64.getEncoder().encodeToString(urlEn.getBytes(ENCODE_UTF8));
+				String base64=Base64.toBase64String(urlEn.getBytes(ENCODE_UTF8));
 				
 				map2Post.put(key, base64);
 				

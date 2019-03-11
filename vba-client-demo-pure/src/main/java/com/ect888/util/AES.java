@@ -1,31 +1,26 @@
 package com.ect888.util;
 
 
-import sun.misc.*;
-import javax.crypto.spec.*;
-import java.security.*;
-import javax.crypto.*;
-import java.io.*;
+import java.io.IOException;
+import java.security.SecureRandom;
+
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+
+import org.bouncycastle.util.encoders.Base64;
 
 
 public class AES
 {
     private String key;
-    private BASE64Decoder decoder;
-    private BASE64Encoder encoder;
-    private static final String AES = "AES";
-    private static final String ALGORITHM = "SHA1PRNG";
     
     public AES() {
         this.key = "B49A86FA425D439dB510A234A3E25A3E";
-        this.decoder = new BASE64Decoder();
-        this.encoder = new BASE64Encoder();
     }
     
     public AES(final String key) {
-        this.key = "B49A86FA425D439dB510A234A3E25A3E";
-        this.decoder = new BASE64Decoder();
-        this.encoder = new BASE64Encoder();
         this.key = key;
     }
     
@@ -94,11 +89,11 @@ public class AES
     }
     
     private String byte2hex(final byte[] b) {
-        return this.encoder.encode(b);
+        return Base64.toBase64String(b);
     }
     
     private byte[] hex2byte(final String hex) throws IOException {
-        return this.decoder.decodeBuffer(hex);
+        return Base64.decode(hex);
     }
     
     public void setKey(final String key) {

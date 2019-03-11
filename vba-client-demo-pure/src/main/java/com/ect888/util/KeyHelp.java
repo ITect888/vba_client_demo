@@ -7,6 +7,9 @@ import java.security.spec.X509EncodedKeySpec;
 
 import javax.crypto.Cipher;
 
+import org.bouncycastle.util.encoders.Base64;
+
+
 /**
  * @描述 公钥加密
  * @author tiger
@@ -15,11 +18,16 @@ import javax.crypto.Cipher;
 public class KeyHelp {
 
 	public static final String KEY_ALGORTHM = "RSA";
+	
+	/**
+	 * 字符编码
+	 */
+	public static final String ENCODE_UTF8="utf-8";
 
 	public static String getStrByPublic(String publickey, String data) throws Exception {
-		byte[] encryData = encryptByPublicKey(data.getBytes(), publickey);
-		String reData = URLEncoder.encode(Base64.encodeBytes(encryData, Base64.DONT_BREAK_LINES), "utf-8");
-		return Base64.encodeBytes(reData.getBytes(), Base64.DONT_BREAK_LINES);
+		byte[] encryData = encryptByPublicKey(data.getBytes(ENCODE_UTF8), publickey);
+		String reData = URLEncoder.encode(Base64.toBase64String(encryData),ENCODE_UTF8);
+		return Base64.toBase64String(reData.getBytes(ENCODE_UTF8));
 	}
 
 	/**

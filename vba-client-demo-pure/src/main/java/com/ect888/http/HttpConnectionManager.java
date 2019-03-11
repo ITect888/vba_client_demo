@@ -49,7 +49,7 @@ public class HttpConnectionManager {
 	private HttpConnectionManager() {
 		try {
 			init();
-		} catch (KeyManagementException |NoSuchAlgorithmException|KeyStoreException e) {
+		} catch (Exception e) {
 			log.error("",e);
 		}
 	}
@@ -131,8 +131,6 @@ that have been idle over a given period of time.
     /**
      * 初始化
      * 
-     * 被@PostConstruct修饰的方法会在服务器加载Servle的时候运行，并且只会被服务器执行一次。
-     * PostConstruct在构造函数之后执行,init()方法之前执行。
      * @throws KeyStoreException 
      * @throws NoSuchAlgorithmException 
      * @throws KeyManagementException 

@@ -40,7 +40,7 @@ public class Function2000209Test {
 	 * post传参数时的身份证号要进行以下处理：
 	 * 步骤为：[a]，用会话密钥加密(AES加密方法);
 	 * [b].URLEncoder.encode[a]中加密串;
-	 * [c],base64[b]中字符串�? 
+	 * [c],base64[b]中字符串
 	 * 
 	 * 必填
 	 */
