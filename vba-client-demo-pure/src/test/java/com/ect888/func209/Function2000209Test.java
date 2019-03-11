@@ -153,7 +153,6 @@ public class Function2000209Test {
 				 log.info("订单成功结束");
 				 log.info("业务应答码respcd="+re.getRespcd());
 				 log.info("业务应答信息respinfo="+re.getRespinfo());
-				 log.info("公安比对分值mpssim="+re.getMpssim());
 			 }else if("03".equals(status)) {//订单业务性失败结束,开始业务处理，此处示例打印主要业务应答结果
 				 log.info("订单业务性失败结束");
 				 log.info("业务应答码respcd="+re.getRespcd());

@@ -6,33 +6,33 @@ import com.ect888.bean.JsonCommon;
 
 /**
  * 
- * 102查询结果
+ * 209查询结果
  * 对应json
- * {
-	"error_info": "",
-	"dsName": ["results"],
+{
+	"error_no": "0",
 	"results": [{
-			"localsim": "",
+			"cerkey": "",
+			"respinfo": "认证一致(通过)",
+			"status": "00",
+			"mpssim": "0.0",
 			"biztyp": "A001",
+			"sysSeqNb": "19103520190311611014140001",
+			"respcd": "5000",
 			"certseq": "341227198912173710",
 			"accountName": "",
-			"mpssim": "88.0",
-			"telephone": "",
-			"respinfo": "认证�?�?(通过)",
-			"sysSeqNb": "19103520181012221215290001",
-			"ptycd": "12500000",
-			"facePicMPS": "",
-			"name": "系统判断为同�?�?",
-			"cerkey": "",
-			"ptyAcct": "12500000",
-			"respcd": "1000",
-			"status": "00"
+			"name": "姓名",
+			"ptyAcct": "ciasacct",
+			"ptycd": "0000100000",
+			"localsim": "",
+			"telephone": ""
 		}
 	],
-	"error_no": "0"
+	"dsName": ["results"],
+	"error_info": ""
 }
-�?
-{"error_info":"网络不可用，请稍后再�?","error_no":"-1006"}
+
+或
+{"error_info":"网络不可用，请稍后再试","error_no":"-1006"}
  * 
  * @author fanyj
  *
