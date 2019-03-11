@@ -1,4 +1,4 @@
-package com.ect888.func209;
+package com.ect888.func239;
 
 import java.util.ArrayList;
 
@@ -6,26 +6,25 @@ import com.ect888.bean.JsonCommon;
 
 /**
  * 
- * 209查询结果
+ * 239查询结果
  * 对应json
 {
     "error_no":"0",
     "results":[
         {
-            "cerkey":"",
             "respinfo":"认证一致(通过)",
+            "phoneProvCity":"",
             "status":"00",
-            "mpssim":"0.0",
+            "phoneOperator":"移动",
             "biztyp":"A001",
-            "sysSeqNb":"19103520190308802006580001",
-            "respcd":"5000",
+            "respcd":"10000",
             "certseq":"341227198912173710",
-            "accountName":"",
+            "resultdata":"0",
+            "sysseqnb":"19103520190309801921280001",
             "name":"姓名",
-            "ptyAcct":"ect888_public_demo",
+            "ptyacct":"ect888_public_demo",
             "ptycd":"ect888_public",
-            "localsim":"",
-            "telephone":""
+            "phoneno":"15298386506"
         }
     ],
     "dsName":[
@@ -37,15 +36,15 @@ import com.ect888.bean.JsonCommon;
  * @author linyw
  *
  */
-public class Json209 extends JsonCommon{
+public class Json239 extends JsonCommon{
 
-	private ArrayList<Result209> results;
+	private ArrayList<Result239> results;
 
-	public ArrayList<Result209> getResults() {
+	public ArrayList<Result239> getResults() {
 		return results;
 	}
 
-	public void setResults(ArrayList<Result209> results) {
+	public void setResults(ArrayList<Result239> results) {
 		this.results = results;
 	}
 	
