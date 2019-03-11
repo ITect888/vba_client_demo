@@ -6,7 +6,7 @@ import com.ect888.bean.JsonCommon;
 
 /**
  * 
- * 102查询结果
+ * 251查询结果
  * 对应json
  * {
 	"error_info": "",

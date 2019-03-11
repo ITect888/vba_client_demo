@@ -2,22 +2,23 @@ package com.ect888.func209;
 
 /**
  * 
+ * 结果数据
+ * 对应json
  * {
-			"localsim": "",
+			"cerkey": "",
+			"respinfo": "认证一致(通过)",
+			"status": "00",
+			"mpssim": "0.0",
 			"biztyp": "A001",
+			"sysSeqNb": "19103520190311611014140001",
+			"respcd": "5000",
 			"certseq": "341227198912173710",
 			"accountName": "",
-			"mpssim": "88.0",
-			"telephone": "",
-			"respinfo": "认证�?�?(通过)",
-			"sysSeqNb": "19103520181012221215290001",
-			"ptycd": "12500000",
-			"facePicMPS": "",
-			"name": "系统判断为同�?�?",
-			"cerkey": "",
-			"ptyAcct": "12500000",
-			"respcd": "1000",
-			"status": "00"
+			"name": "姓名",
+			"ptyAcct": "ciasacct",
+			"ptycd": "0000100000",
+			"localsim": "",
+			"telephone": ""
 		}
  * 
  * @author fanyj
@@ -26,11 +27,11 @@ package com.ect888.func209;
 public class Result209 {
 	
 	/**
-	 * 订单流水�?
+	 * 订单流水号
 	 */
 	private String sysSeqNb;
 	/**
-	 * 业务应答�?
+	 * 业务应答码
 	 */
 	private String respcd;
 	/**
@@ -38,13 +39,10 @@ public class Result209 {
 	 */
 	private String respinfo;
 	/**
-	 * 订单处理状�??
+	 * 订单处理状态
 	 */
 	private String status;
-	/**
-	 * 公安比对分�??
-	 */
-	private String mpssim;
+
 	/**
 	 * 机构代码
 	 */
@@ -57,7 +55,10 @@ public class Result209 {
 	 * 业务类型
 	 */
 	private String biztyp;
-	
+	/**
+	 * 预留字段
+	 */
+	private String mpssim;
 	/**
 	 * 预留字段
 	 */
@@ -70,10 +71,6 @@ public class Result209 {
 	 * 预留字段
 	 */
 	private String telephone;
-	/**
-	 * 预留字段
-	 */
-	private String facePicMPS;
 	/**
 	 * 预留字段
 	 */
@@ -151,12 +148,6 @@ public class Result209 {
 	}
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
-	}
-	public String getFacePicMPS() {
-		return facePicMPS;
-	}
-	public void setFacePicMPS(String facePicMPS) {
-		this.facePicMPS = facePicMPS;
 	}
 	public String getName() {
 		return name;
