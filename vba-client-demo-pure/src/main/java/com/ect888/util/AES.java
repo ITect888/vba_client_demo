@@ -100,6 +100,4 @@ public class AES
         this.key = key;
     }
     
-    public static void main(final String[] args) {
-    }
 }

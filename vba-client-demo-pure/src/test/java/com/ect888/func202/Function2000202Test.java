@@ -16,8 +16,6 @@ import com.alibaba.fastjson.JSON;
 import com.ect888.bus.FunctionCommon;
 import com.ect888.bus.impl.FunctionCommonImpl;
 import com.ect888.config.Config;
-import com.ect888.func202.Json202;
-import com.ect888.func202.Result202;
 import com.ect888.http.PoolClient;
 
 /**

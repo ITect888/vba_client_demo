@@ -1,7 +1,5 @@
 package com.ect888.func207;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +16,7 @@ import com.ect888.config.Config;
 import com.ect888.http.PoolClient;
 
 /**
- * 公安实名认证服务-同步 
+ * 银行卡三四要素认证接口
  * 
  * @author fanyj
  *
