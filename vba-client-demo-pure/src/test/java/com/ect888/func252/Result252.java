@@ -1,4 +1,4 @@
-package com.ect888.func254;
+package com.ect888.func252;
 
 /**
  * 
@@ -23,7 +23,7 @@ package com.ect888.func254;
  * @author fanyj
  *
  */
-public class Result254 {
+public class Result252 {
 	
 	/**
 	 * 订单流水号

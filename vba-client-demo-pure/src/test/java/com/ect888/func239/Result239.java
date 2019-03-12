@@ -1,33 +1,32 @@
-package com.ect888.func209;
+package com.ect888.func239;
 
 /**
  * 
  * {
-            "cerkey":"",
             "respinfo":"认证一致(通过)",
+            "phoneProvCity":"",
             "status":"00",
-            "mpssim":"0.0",
+            "phoneOperator":"移动",
             "biztyp":"A001",
-            "sysSeqNb":"19103520190308802006580001",
-            "respcd":"5000",
+            "respcd":"10000",
             "certseq":"341227198912173710",
-            "accountName":"",
+            "resultdata":"0",
+            "sysseqnb":"19103520190309801921280001",
             "name":"姓名",
-            "ptyAcct":"ect888_public_demo",
+            "ptyacct":"ect888_public_demo",
             "ptycd":"ect888_public",
-            "localsim":"",
-            "telephone":""
+            "phoneno":"15298386506"
         }
  * 
  * @author linyw
  *
  */
-public class Result209 {
+public class Result239 {
 	
 	/**
 	 * 订单流水号
 	 */
-	private String sysSeqNb;
+	private String sysseqnb;
 	/**
 	 * 业务应答码
 	 */
@@ -41,9 +40,9 @@ public class Result209 {
 	 */
 	private String status;
 	/**
-	 * 公安比对分值
+	 * 返回结果
 	 */
-	private String mpssim;
+	private String resultdata;
 	/**
 	 * 机构代码
 	 */
@@ -56,36 +55,31 @@ public class Result209 {
 	 * 业务类型
 	 */
 	private String biztyp;
-	
 	/**
-	 * 预留字段
+	 * 手机号
+	 */
+	private String phoneno;
+	/**
+	 * 身份证号
 	 */
 	private String certseq;
 	/**
-	 * 预留字段
-	 */
-	private String accountName;
-	/**
-	 * 预留字段
-	 */
-	private String telephone;
-	/**
-	 * 预留字段
+	 * 姓名
 	 */
 	private String name;
 	/**
-	 * 预留字段
+	 * 手机号所属地
 	 */
-	private String cerkey;
+	private String phoneProvCity;
 	/**
-	 * 预留字段
+	 * 手机运营商
 	 */
-	private String localsim;
-	public String getSysSeqNb() {
-		return sysSeqNb;
+	private String phoneOperator;
+	public String getSysseqnb() {
+		return sysseqnb;
 	}
-	public void setSysSeqNb(String sysSeqNb) {
-		this.sysSeqNb = sysSeqNb;
+	public void setSysseqnb(String sysseqnb) {
+		this.sysseqnb = sysseqnb;
 	}
 	public String getRespcd() {
 		return respcd;
@@ -105,11 +99,11 @@ public class Result209 {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public String getMpssim() {
-		return mpssim;
+	public String getResultdata() {
+		return resultdata;
 	}
-	public void setMpssim(String mpssim) {
-		this.mpssim = mpssim;
+	public void setResultdata(String resultdata) {
+		this.resultdata = resultdata;
 	}
 	public String getPtycd() {
 		return ptycd;
@@ -129,23 +123,17 @@ public class Result209 {
 	public void setBiztyp(String biztyp) {
 		this.biztyp = biztyp;
 	}
+	public String getPhoneno() {
+		return phoneno;
+	}
+	public void setPhoneno(String phoneno) {
+		this.phoneno = phoneno;
+	}
 	public String getCertseq() {
 		return certseq;
 	}
 	public void setCertseq(String certseq) {
 		this.certseq = certseq;
-	}
-	public String getAccountName() {
-		return accountName;
-	}
-	public void setAccountName(String accountName) {
-		this.accountName = accountName;
-	}
-	public String getTelephone() {
-		return telephone;
-	}
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
 	}
 	public String getName() {
 		return name;
@@ -153,16 +141,17 @@ public class Result209 {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getCerkey() {
-		return cerkey;
+	public String getPhoneProvCity() {
+		return phoneProvCity;
 	}
-	public void setCerkey(String cerkey) {
-		this.cerkey = cerkey;
+	public void setPhoneProvCity(String phoneProvCity) {
+		this.phoneProvCity = phoneProvCity;
 	}
-	public String getLocalsim() {
-		return localsim;
+	public String getPhoneOperator() {
+		return phoneOperator;
 	}
-	public void setLocalsim(String localsim) {
-		this.localsim = localsim;
+	public void setPhoneOperator(String phoneOperator) {
+		this.phoneOperator = phoneOperator;
 	}
+
 }

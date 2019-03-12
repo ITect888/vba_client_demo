@@ -1,29 +1,28 @@
-package com.ect888.func254;
+package com.ect888.func207;
 
 /**
  * 
  * {
-			"localsim": "",
-			"biztyp": "A001",
-			"certseq": "341227198912173710",
-			"accountName": "",
-			"mpssim": "88.0",
-			"telephone": "",
-			"respinfo": "认证一致(通过)",
-			"sysSeqNb": "19103520181012221215290001",
-			"ptycd": "12500000",
-			"facePicMPS": "",
-			"name": "系统判断为同一人",
-			"cerkey": "",
-			"ptyAcct": "12500000",
-			"respcd": "1000",
-			"status": "00"
-		}
+            "cerkey":"",
+            "respinfo":"认证一致(通过)",
+            "status":"00",
+            "mpssim":"0.0",
+            "biztyp":"A001",
+            "sysSeqNb":"19103520190309801851220001",
+            "respcd":"2000",
+            "certseq":"341227198912173710",
+            "accountName":"工商银行",
+            "name":"姓名",
+            "ptyAcct":"ect888_public_demo",
+            "ptycd":"ect888_public",
+            "localsim":"0.0",
+            "telephone":"15298386506"
+        }
  * 
  * @author fanyj
  *
  */
-public class Result254 {
+public class Result207 {
 	
 	/**
 	 * 订单流水号
@@ -70,10 +69,6 @@ public class Result254 {
 	 * 预留字段
 	 */
 	private String telephone;
-	/**
-	 * 预留字段
-	 */
-	private String facePicMPS;
 	/**
 	 * 预留字段
 	 */
@@ -151,12 +146,6 @@ public class Result254 {
 	}
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
-	}
-	public String getFacePicMPS() {
-		return facePicMPS;
-	}
-	public void setFacePicMPS(String facePicMPS) {
-		this.facePicMPS = facePicMPS;
 	}
 	public String getName() {
 		return name;
