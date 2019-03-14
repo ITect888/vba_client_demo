@@ -42,7 +42,7 @@ public class Result258 {
 	 */
 	private String status;
 	/**
-	 * 公安比对分值
+	 * 比对分值
 	 */
 	private String mpssim;
 	/**

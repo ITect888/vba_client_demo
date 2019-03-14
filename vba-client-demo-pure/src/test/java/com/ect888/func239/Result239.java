@@ -58,7 +58,7 @@ public class Result239 {
 	/**
 	 * 手机号
 	 */
-	private String phoneno;
+	private String phoneno; 
 	/**
 	 * 身份证号
 	 */

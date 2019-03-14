@@ -19,7 +19,7 @@ import com.ect888.config.Config;
 import com.ect888.http.PoolClient;
 
 /**
- * 公安身份证图像比对
+ * 身份证图像比对
  * 
  * @author linyw
  *
@@ -58,7 +58,7 @@ public class Function2000252Test {
 	 */
 	String placeid="00";
 	/**
-	 * 对照接口文档查看
+	 * 业务类型
 	 * 符合入参长度即可，不做技术限制
 	 * 
 	 * 参与签名
@@ -152,12 +152,12 @@ public class Function2000252Test {
 				 log.info("订单成功结束");
 				 log.info("业务应答码respcd="+re.getRespcd());
 				 log.info("业务应答信息respinfo="+re.getRespinfo());
-				 log.info("公安比对分值mpssim="+re.getMpssim());
+				 log.info("比对分值mpssim="+re.getMpssim());
 			 }else if("03".equals(status)) {//订单业务性失败结束,开始业务处理，此处示例打印主要业务应答结果
 				 log.info("订单业务性失败结束");
 				 log.info("业务应答码respcd="+re.getRespcd());
 				 log.info("业务应答信息respinfo="+re.getRespinfo());
-				 log.info("公安比对分值mpssim="+re.getMpssim());
+				 log.info("比对分值mpssim="+re.getMpssim());
 			 }else if("01".equals(status)){//订单处理中，请稍后再轮询查询
 				 log.info("订单处理中，请稍后再轮询查询");
 			 }else {//异常，未知返回码，健壮性考虑，留此分支,联系服务端

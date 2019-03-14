@@ -22,7 +22,7 @@ import com.ect888.util.KeyHelp;
  * 账户密码需要客户端维护和保管。账户密码若遗失可申请证通进行重置
  * 重置后初始密码为空，需要设置为非空值。即第一次设置密码时，ptypwd为空，但是newptypwd不能为空（生成规则机构自定义，超过16位的字母数字组合）
  * 
- * 调用200002和2000006两步一般只需要调用一次，后续有修改密码以及修改会话秘钥需要时可再次调用。
+ * 200002和2000006接口一般只需要调用一次，后续有修改密码以及修改会话秘钥需要时可再次调用。
  * 
  * @author fanyj
  *
@@ -36,7 +36,7 @@ public class Function2000006Test {
 	private PoolClient client=PoolClient.getInstance();
 	
 	public void doWork() throws Exception {
-		//组装参数，第一次修改密码ptypwd传空，非第一次修改密码ptypwd不能为空或者不传。注：账户密码并不参与业务交易，只用于修改会话秘钥;
+		//组装参数，第一次修改密码时ptypwd传空，非第一次修改密码时ptypwd不能为空或者不传。注：账户密码并不参与业务交易，只用于修改会话秘钥;
 		String data = "ptyacct="+config.getPtyacct()
 		+"&ptycd="+config.getPtycd()+"&newptypwd="+config.getNewPtyPwd()
 		+"&ptypwd="+config.getPtyPwd();
