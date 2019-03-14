@@ -10,6 +10,8 @@ import com.ect888.bean.JsonCommon;
  * 对应json
  *
  *{
+ *	"error_no": "0",
+	"results": [{
 			"respinfo": "查得",
 			"status": "00",
 			"verify_result": "C",
@@ -26,6 +28,9 @@ import com.ect888.bean.JsonCommon;
 			"ptyAcct": "ect888_public_demo",
 			"ptycd": "ect888_public",
 			"phoneno": "15121016666"
+		],
+	"dsName": ["results"],
+	"error_info": ""
  *}
  *或
  *{"error_info":"网络不可用，请稍后再试","error_no":"-1006"}

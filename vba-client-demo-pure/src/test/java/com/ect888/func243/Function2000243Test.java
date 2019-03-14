@@ -4,11 +4,8 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,6 +19,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.ect888.bus.FunctionCommon;
 import com.ect888.bus.impl.FunctionCommonImpl;
 import com.ect888.config.Config;
@@ -97,7 +96,7 @@ public class Function2000243Test {
 		//组装报文
 		InputStream is = null;
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		File cardFront = new File("D:/111.jpg");
+		File cardFront = new File("D:/222.jpg");
 		try {
 			is = new FileInputStream(cardFront);
 			BufferedImage bi =ImageIO.read(is);
@@ -150,11 +149,18 @@ public class Function2000243Test {
 			 
 			 Result243 re=json.getResults().get(0);
 			 String status=re.getStatus();
+			 String reslString = re.getRes1();
+			 JSONObject res1= JSON.parseObject(reslString);
+			 
+			 JSONArray add =res1.getJSONArray("address");
+			 String addposition= add.getJSONObject(0).getString("position");
+			 
 			 if("00".equals(status)) {//订单成功结束,开始业务处理，此处示例打印主要业务应答结果
 				 System.out.println("订单成功结束");
 				 System.out.println("业务应答码respcd="+re.getRespcd());
 				 System.out.println("业务应答信息respinfo="+re.getRespinfo());
 				 System.out.println("业务应答信息res1="+re.getRes1());
+				 System.out.println("业务应答信息地址位置addposition="+addposition);
 			 }else if("03".equals(status)) {//订单业务性失败结束,开始业务处理，此处示例打印主要业务应答结果
 				 System.out.println("订单业务性失败结束");
 				 System.out.println("业务应答码respcd="+re.getRespcd());

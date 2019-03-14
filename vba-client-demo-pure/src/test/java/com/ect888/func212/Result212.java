@@ -3,8 +3,6 @@ package com.ect888.func212;
 /**
  * 
  {
-	"error_no": "0",
-	"results": [{
 			"iscriminal": "",
 			"caseType": "",
 			"caseTime": "",
@@ -21,10 +19,6 @@ package com.ect888.func212;
 			"ptyacct": "xikanglan",
 			"ptycd": "xikanglan"
 		}
-	],
-	"dsName": ["results"],
-	"error_info": ""
- *}
  * 
  * @author fanyj
  *

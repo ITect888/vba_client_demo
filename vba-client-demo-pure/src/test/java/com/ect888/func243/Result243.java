@@ -3,8 +3,6 @@ package com.ect888.func243;
 /**
  * 
  *{
-	"error_no": "0",
-	"results": [{
 			"respcd": "43000",
 			"respinfo": "识别成功",
 			"status": "00",
@@ -16,10 +14,6 @@ package com.ect888.func243;
 			"biztyp": "0541",
 			"phoneno": "18616280052"
 		}
-	],
-	"dsName": ["results"],
-	"error_info": ""
-}
  * 
  * @author fanyj
  *

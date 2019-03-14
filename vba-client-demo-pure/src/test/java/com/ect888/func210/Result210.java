@@ -5,8 +5,6 @@ package com.ect888.func210;
  * 结果数据
  * 对应json
  *{
-	"error_no": "0",
-	"results": [{
 			"respcd": "12000",
 			"certseq": "",
 			"cerkey": "",
@@ -19,11 +17,6 @@ package com.ect888.func210;
 			"ptycd": "xikanglan",
 			"biztyp": "0541",
 			"telephone": ""
-		}
-	],
-	"dsName": ["results"],
-	"error_info": ""
- *}
  * @author fanyj
  *
  */

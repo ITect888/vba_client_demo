@@ -3,8 +3,6 @@ package com.ect888.func248;
 /**
  * 
  * {
-	"error_no": "0",
-	"results": [{
 			"respcd": "48000",
 			"certseq": "61030219910118512X",
 			"cmpResult": "{\"resAddress\":\"省一致/市一致/县（区）一致\",\"resBirthday\":\"一致\",\"resCertSeq\":\"一致\",\"resCsdssx\":\"省一致/市不一致/县（区）不一致\",\"resCym\":\"\",\"resEducation\":\"一致\",\"resEthnicity\":\"一致\",\"resFwcs\":\"\",\"resJgssx\":\"省一致/市不一致/县（区）不一致\",\"resMarrige\":\"一致\",\"resName\":\"一致\",\"resSex\":\"一致\",\"resSsssxq\":\"\"}",
@@ -17,10 +15,6 @@ package com.ect888.func248;
 			"sysSeqNb": "19103520190313621654300001",
 			"biztyp": "A001"
 		}
-	],
-	"dsName": ["results"],
-	"error_info": ""
-}
  * 
  * @author fanyj
  *
@@ -72,7 +66,7 @@ public class Result248 {
 	 */
 	private String facePicMPS;
 	/**
-	 * 带水印照片
+	 * 比对结果详情
 	 */
 	private String cmpResult;
 	

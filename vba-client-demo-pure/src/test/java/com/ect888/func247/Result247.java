@@ -3,8 +3,6 @@ package com.ect888.func247;
 /**
  * 
  *{
-	"error_no": "0",
-	"results": [{
 			"respinfo": "交易异常",
 			"status": "03",
 			"cardNumberImage": "",
@@ -19,9 +17,6 @@ package com.ect888.func247;
 			"ptycd": "xikanglan",
 			"ptyAcct": "xikanglan"
 		}
-	],
-	"dsName": ["results"],
-	"error_info": ""
 }
  * 
  * @author fanyj

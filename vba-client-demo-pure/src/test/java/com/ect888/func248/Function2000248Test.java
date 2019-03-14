@@ -213,6 +213,7 @@ public class Function2000248Test {
 				 System.out.println("订单成功结束");
 				 System.out.println("业务应答码respcd="+re.getRespcd());
 				 System.out.println("业务应答信息respinfo="+re.getRespinfo());
+				 System.out.println("cmpResult结果"+re.getCmpResult());
 				 System.out.println("身份证号认证结果resCertSeq="+cmpResult.getResCertSeq());
 				 System.out.println("姓名认证结果resName="+cmpResult.getResName());
 			 }else if("03".equals(status)) {//订单业务性失败结束,开始业务处理，此处示例打印主要业务应答结果

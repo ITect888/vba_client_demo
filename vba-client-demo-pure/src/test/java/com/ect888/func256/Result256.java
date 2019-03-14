@@ -2,17 +2,11 @@ package com.ect888.func256;
 
 /**
  *{
-	"error_no": "0",
-	"results": [{
 			"respcd": "51000",
 			"respinfo": "比中失效身份证",
 			"status": "00",
 			"sysSeqNb": "19103520190313801524300001"
 		}
-	],
-	"dsName": ["results"],
-	"error_info": ""
-}
  * 
  * @author fanyj
  *

@@ -1,5 +1,25 @@
 package com.ect888.func248;
 
+/**
+ * 比对结果详情
+ * {
+	"resAddress": "省一致/市一致/县（区）一致",
+	"resBirthday": "一致",
+	"resCertSeq": "一致",
+	"resCsdssx": "省一致/市不一致/县（区）不一致",
+	"resCym": "",
+	"resEducation": "一致",
+	"resEthnicity": "一致",
+	"resFwcs": "",
+	"resJgssx": "省一致/市不一致/县（区）不一致",
+	"resMarrige": "一致",
+	"resName": "一致",
+	"resSex": "一致",
+	"resSsssxq": ""
+	}
+ * @author Wee
+ *
+ */
 public class CmpResult {
 	/**
 	 * 身份证号认证结果
