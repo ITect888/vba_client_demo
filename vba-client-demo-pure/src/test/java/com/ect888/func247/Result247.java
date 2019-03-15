@@ -3,21 +3,20 @@ package com.ect888.func247;
 /**
  * 
  *{
-			"respinfo": "交易异常",
+			"respinfo": "识别失败",
 			"status": "03",
 			"cardNumberImage": "",
 			"accountCard": "",
 			"biztyp": "0",
-			"sysSeqNb": "19103520190313621943230116",
+			"sysSeqNb": "19103520190318611017060001",
 			"cardType": "",
 			"validate": "",
-			"respcd": "47002",
+			"respcd": "47001",
 			"accountName": "",
 			"name": "",
-			"ptycd": "xikanglan",
-			"ptyAcct": "xikanglan"
+			"ptycd": "0000100000",
+			"ptyAcct": "ciasacct"
 		}
-}
  * 
  * @author fanyj
  *
