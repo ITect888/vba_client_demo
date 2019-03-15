@@ -50,7 +50,7 @@ public class Function2000251Test {
 	/**
 	 * 正面人像图片路径
 	 * 需用Base64编码
-	 * 公安接口限制图片大小为30k，100k-1mb大小的图片将由证通进行压缩，不支持1MB以上的图片。
+	 * 接口限制图片大小为30k，100k-1mb大小的图片将由证通进行压缩，不支持1MB以上的图片。
 	 */
 	String videopic=Thread.currentThread().getContextClassLoader().getResource("").getPath()+File.separator+"30K高清案例.jpg";
 	
@@ -68,7 +68,8 @@ public class Function2000251Test {
 	 */
 	String placeid="00";
 	/**
-	 * 对照接口文档查看
+	 * 服务类型
+	 * 
 	 * 符合入参长度即可，不做技术限制
 	 * 
 	 * 参与签名
@@ -99,14 +100,12 @@ public class Function2000251Test {
 	 * 
 	 * 将入参，按照http post上送和签名规则，放入map内
 	 * 
-	 * 
 	 * 调用2000251接口时的签名过程：
 	 * 上送参数（biztyp,biztypdesc,certseq，placeid,ptyacct,ptycd,sourcechnl,timestamp,key(会话密钥)），其中key前面的是按照字母排序的，key则是要最后附加上去。其中在签名的时候身份证号需要利用会话密钥进行AES加密。
 	 * 生成的防篡改签名sign在接口调用时和业务参数一起上传。"
 	 * 
 	 * 调用2000251比对查询接口：上送参数（biztyp,biztypdesc,certseq,placeid,ptyacct,ptycd,sourcechnl,timestamp, videopic, usernm,funcNo,sign(签名)）
 	 * ，传上述参数时的身份证号要进行以下处理，步骤为：[a]，用会话密钥加密(AES加密方法);[b].URLEncoder.encode（[a]中加密串）;[c],base64（[b]中字符串）  ,身份证正面照需用Base64编码，传上述参数的时候没有顺序要求的。                                                                                                                                                                       
-	 * 
 	 * 
 	 * @return 将入参，按照http post上送和签名规则，放入map内
 	 */
@@ -163,12 +162,12 @@ public class Function2000251Test {
 				 log.info("订单成功结束");
 				 log.info("业务应答码respcd="+re.getRespcd());
 				 log.info("业务应答信息respinfo="+re.getRespinfo());
-				 log.info("公安比对分值mpssim="+re.getMpssim());
+				 log.info("比对分值mpssim="+re.getMpssim());
 			 }else if("03".equals(status)) {//订单业务性失败结束,开始业务处理，此处示例打印主要业务应答结果
 				 log.info("订单业务性失败结束");
 				 log.info("业务应答码respcd="+re.getRespcd());
 				 log.info("业务应答信息respinfo="+re.getRespinfo());
-				 log.info("公安比对分值mpssim="+re.getMpssim());
+				 log.info("比对分值mpssim="+re.getMpssim());
 			 }else if("01".equals(status)){//订单处理中，请稍后再轮询查询
 				 log.info("订单处理中，请稍后再轮询查询");
 			 }else {//异常，未知返回码，健壮性考虑，留此分支,联系服务端

@@ -90,7 +90,7 @@ public class Function2000207Test {
 	 */
 	String placeid="00";
 	/**
-	 * 对照接口文档查看
+	 * 业务类型
 	 * 符合入参长度即可，不做技术限制
 	 * 
 	 * 参与签名

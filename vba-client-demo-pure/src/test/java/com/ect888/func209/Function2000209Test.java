@@ -18,7 +18,7 @@ import com.ect888.config.Config;
 import com.ect888.http.PoolClient;
 
 /**
- * 公安实名认证服务-同步 
+ * 实名认证服务-同步 
  * 
  * @author fanyj
  *
@@ -60,7 +60,7 @@ public class Function2000209Test {
 	 */
 	String placeid="00";
 	/**
-	 * 对照接口文档查看
+	 * 服务类型
 	 * 符合入参长度即可，不做技术限制
 	 * 
 	 * 参与签名
