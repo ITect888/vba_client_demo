@@ -1,23 +1,12 @@
 package com.ect888.func247;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.imageio.ImageIO;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.PropertyConfigurator;
-import org.bouncycastle.util.encoders.Base64;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -43,7 +32,8 @@ public class Function2000247Test {
 	 * 银行卡正面照片（base64）
 	 * jpg格式图片，建议转换成base64字符串后大小控制在50K-500K
 	 */
-	String frontBase="";
+	String frontBase=Thread.currentThread().getContextClassLoader().getResource("").getPath()+File.separator+"shbank.jpg";
+	
 	/**
 	 * 来源渠道，填固定值“0”
 	 * 
@@ -70,7 +60,7 @@ public class Function2000247Test {
 	 * 
 	 * 参与签名
 	 */
-	String biztypdesc="名片OCR提取";
+	String biztypdesc="银行卡OCR提取";
 	
 	/**
 	 * 模拟调用
@@ -95,25 +85,6 @@ public class Function2000247Test {
 	 */
 	private Map<String, String> buildParams() {
 		//组装报文
-		InputStream is = null;
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		File cardFront = new File("D:/444.jpg");
-		try {
-			is = new FileInputStream(cardFront);
-			BufferedImage bi =ImageIO.read(is);
-			ImageIO.write(bi,  "jpg", out);
-			byte[] bt = out.toByteArray();
-			frontBase =Base64.toBase64String(bt);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally{
-			try {
-				is.close();
-				out.close();
-			} catch (IOException e) {
-				
-			}
-		}
 		
 		Map<String,String> params=new HashMap<String,String>();
 		
@@ -125,7 +96,7 @@ public class Function2000247Test {
 		params.put(FunctionCommon.TO_SIGN_HEAD+"ptyacct",config.getPtyacct());
 		params.put(FunctionCommon.TO_SIGN_HEAD+"ptycd",config.getPtycd());
 		
-		params.put("bankcardfront", frontBase);
+		params.put(FunctionCommon.TO_PIC_BASE64_HEAD+"bankcardfront",frontBase);
 		params.put("funcNo", FUNC_NO);
 		
 		return params;

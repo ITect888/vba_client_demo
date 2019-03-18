@@ -2,22 +2,24 @@ package com.ect888.func212;
 
 /**
  * 
- {
-			"iscriminal": "",
-			"caseType": "",
-			"caseTime": "",
-			"respinfo": "查询失败",
-			"status": "03",
-			"biztyp": "A001",
-			"provinceNo": "",
-			"respcd": "8001",
-			"certseq": "422823199107192312",
-			"sysseqnb": "19103520190312611501310083",
-			"name": "张三",
-			"newestDate": "",
-			"badCnt": "",
-			"ptyacct": "xikanglan",
-			"ptycd": "xikanglan"
+ * 结果json
+ * 
+		{
+				"iscriminal": "2,1,3,9,5,4,6,8,7",
+				"caseType": "6070000",
+				"caseTime": "[5,10)",
+				"respinfo": "查询成功",
+				"status": "00",
+				"biztyp": "CIAS",
+				"provinceNo": "23",
+				"respcd": "8000",
+				"certseq": "341227198912173710",
+				"sysseqnb": "401320190315011013210001",
+				"name": "姓名",
+				"newestDate": "[5,10)",
+				"ptyacct": "ciasacct",
+				"badCnt": "1",
+				"ptycd": "0000100000"
 		}
  * 
  * @author fanyj
@@ -59,7 +61,7 @@ public class Result212 {
 	 */
 	private String iscriminal;
 	/**
-	 * 前科事件数量
+	 * 前科事件数量区间
 	 */
 	private String badCnt;
 	/**
@@ -71,7 +73,7 @@ public class Result212 {
 	 */
 	private String caseType;
 	/**
-	 * 最近一次不良时间
+	 * 最近一次不良时间段
 	 */
 	private String newestDate;
 	/**

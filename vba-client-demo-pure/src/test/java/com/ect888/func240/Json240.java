@@ -10,7 +10,7 @@ import com.ect888.bean.JsonCommon;
  * 对应json
  *
  *{
- *	"error_no": "0",
+ 	"error_no": "0",
 	"results": [{
 			"respinfo": "查得",
 			"status": "00",
@@ -31,7 +31,7 @@ import com.ect888.bean.JsonCommon;
 		],
 	"dsName": ["results"],
 	"error_info": ""
- *}
+ }
  *或
  *{"error_info":"网络不可用，请稍后再试","error_no":"-1006"}
  * 
