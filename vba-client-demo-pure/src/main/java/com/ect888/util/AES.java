@@ -16,6 +16,8 @@ public class AES
 {
     private String key;
     
+    static String mode = "AES/ECB/PKCS5Padding";
+    
     public AES() {
         this.key = "B49A86FA425D439dB510A234A3E25A3E";
     }
@@ -32,7 +34,7 @@ public class AES
         final SecretKey secretKey = kgen.generateKey();
         final byte[] enCodeFormat = secretKey.getEncoded();
         final SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");
-        final Cipher cipher = Cipher.getInstance("AES");
+        final Cipher cipher = Cipher.getInstance(mode);
         cipher.init(1, key);
         final byte[] result = cipher.doFinal(byteContent);
         return result;
@@ -46,7 +48,7 @@ public class AES
         final SecretKey secretKey = kgen.generateKey();
         final byte[] enCodeFormat = secretKey.getEncoded();
         final SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");
-        final Cipher cipher = Cipher.getInstance("AES");
+        final Cipher cipher = Cipher.getInstance(mode);
         cipher.init(2, key);
         final byte[] result = cipher.doFinal(content);
         return result;
