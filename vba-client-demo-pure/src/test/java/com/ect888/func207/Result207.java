@@ -41,7 +41,7 @@ public class Result207 {
 	 */
 	private String status;
 	/**
-	 * 比对分值
+	 * 预留字段
 	 */
 	private String mpssim;
 	/**
@@ -58,19 +58,19 @@ public class Result207 {
 	private String biztyp;
 	
 	/**
-	 * 预留字段
+	 * 身份证号
 	 */
 	private String certseq;
 	/**
-	 * 预留字段
+	 * 发卡行名称
 	 */
 	private String accountName;
 	/**
-	 * 预留字段
+	 * 手机号
 	 */
 	private String telephone;
 	/**
-	 * 预留字段
+	 * 姓名
 	 */
 	private String name;
 	/**
@@ -81,6 +81,7 @@ public class Result207 {
 	 * 预留字段
 	 */
 	private String localsim;
+	
 	public String getSysSeqNb() {
 		return sysSeqNb;
 	}
