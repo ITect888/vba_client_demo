@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+	<display-name>MobileService</display-name>
+		
+	<servlet>  
+	    <servlet-name>InvokeTest</servlet-name>  
+	    <servlet-class>com.ect888.test.servlet.InvokeTest</servlet-class>  
+	</servlet>
+	<servlet-mapping>  
+	    <servlet-name>InvokeTest</servlet-name>  
+	    <url-pattern>/InvokeTest</url-pattern>  
+	</servlet-mapping>	
+	
+		<servlet>  
+	    <servlet-name>InvokePrd</servlet-name>  
+	    <servlet-class>com.ect888.test.servlet.InvokePrd</servlet-class>  
+	</servlet>
+	<servlet-mapping>  
+	    <servlet-name>InvokePrd</servlet-name>  
+	    <url-pattern>/InvokePrd</url-pattern>  
+	</servlet-mapping>	
+	
+</web-app>

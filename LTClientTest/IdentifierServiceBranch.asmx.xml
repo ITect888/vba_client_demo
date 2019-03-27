@@ -1,0 +1,1402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.zonrong.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://www.zonrong.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.zonrong.org/">
+      <s:element name="SingleCheckBranch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:CheckRequest" />
+            <s:element minOccurs="0" maxOccurs="1" name="branch" type="tns:Branch" />
+            <s:element minOccurs="0" maxOccurs="1" name="userData" type="tns:LoginUserData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CheckRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CitizId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BirthDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sex" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nation" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Branch">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="BranchNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BranchName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LoginUserData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="LoginName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UniqueId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Client" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ShareSuper" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsAdministrator" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="FirstLogin" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SingleCheckBranchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SingleCheckBranchResult" type="tns:BranchResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BranchResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:CheckResponse">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Branch" type="tns:Branch" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="CheckResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ResponseBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Identifier" type="tns:IdentifierData" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ResponseBase" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ResponseCode" type="tns:ResponseCode" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ResponseCode">
+        <s:restriction base="s:string">
+          <s:enumeration value="SUCCESS" />
+          <s:enumeration value="NO_ENOUGH_MONEY" />
+          <s:enumeration value="IDENTITY_DENIED" />
+          <s:enumeration value="PARAMETER_ERROR" />
+          <s:enumeration value="TOO_MANY_RECORD" />
+          <s:enumeration value="SERVICE_ERROR" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="IdentifierData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CitizenIdNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CitizenIdResult" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SexCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NationCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BirthDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Photos" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SingleCheck">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:CheckRequest" />
+            <s:element minOccurs="0" maxOccurs="1" name="userData" type="tns:LoginUserData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SingleCheckResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SingleCheckResult" type="tns:CheckResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryCizitenDataCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:QueryCizizenRequest" />
+            <s:element minOccurs="0" maxOccurs="1" name="userData" type="tns:LoginUserData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="QueryCizizenRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:PagedRequest">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="DateStart" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CitizId" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="DateEnd" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="OperatorName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Result" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="PagedRequest">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="StartIndex" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="EndIndex" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="QueryCizitenDataCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryCizitenDataCountResult" type="tns:QueryRecordCountResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="QueryRecordCountResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ResponseBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Count" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="QueryCizitenData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:QueryCizizenRequest" />
+            <s:element minOccurs="0" maxOccurs="1" name="userData" type="tns:LoginUserData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryCizitenDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryCizitenDataResult" type="tns:QueryCitizenResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="QueryCitizenResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ResponseBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Identifiers" type="tns:ArrayOfIdentifierData" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfIdentifierData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="IdentifierData" nillable="true" type="tns:IdentifierData" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="IsCitizenExists">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:CheckRequest" />
+            <s:element minOccurs="0" maxOccurs="1" name="userData" type="tns:LoginUserData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsCitizenExistsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsCitizenExistsResult" type="tns:IsCitizenExistsResponseCode" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="IsCitizenExistsResponseCode">
+        <s:restriction base="s:string">
+          <s:enumeration value="EXIST" />
+          <s:enumeration value="NOT_EXIST" />
+          <s:enumeration value="IDENTITY_DENIED" />
+          <s:enumeration value="SERVICE_ERROR" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetCitizenDataAndWriteLog">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:CheckRequest" />
+            <s:element minOccurs="0" maxOccurs="1" name="userData" type="tns:LoginUserData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCitizenDataAndWriteLogResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCitizenDataAndWriteLogResult" type="tns:GetCitizenResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetCitizenResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ResponseBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Identifier" type="tns:IdentifierData" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetCitizenData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:CheckRequest" />
+            <s:element minOccurs="0" maxOccurs="1" name="userData" type="tns:LoginUserData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCitizenDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCitizenDataResult" type="tns:GetCitizenResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryHistoryData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:QueryHistoryRequest" />
+            <s:element minOccurs="0" maxOccurs="1" name="userData" type="tns:LoginUserData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="QueryHistoryRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:PagedRequest">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="DateStart" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="DateEnd" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="UserId" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="QueryHistoryDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryHistoryDataResult" type="tns:QueryHistoryResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="QueryHistoryResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ResponseBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Histories" type="tns:ArrayOfHistoryData" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfHistoryData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="HistoryData" nillable="true" type="tns:HistoryData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HistoryData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Seq" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Time" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Identifier" type="tns:IdentifierData" />
+          <s:element minOccurs="0" maxOccurs="1" name="ImportType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsHistory" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="OperationId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OperatorName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="QueryHistoryDataCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:QueryHistoryRequest" />
+            <s:element minOccurs="0" maxOccurs="1" name="userData" type="tns:LoginUserData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryHistoryDataCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryHistoryDataCountResult" type="tns:QueryRecordCountResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryFeeData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:QueryFeeRequest" />
+            <s:element minOccurs="0" maxOccurs="1" name="userData" type="tns:LoginUserData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="QueryFeeRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserId" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="QueryFeeDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryFeeDataResult" type="tns:QueryFeeResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="QueryFeeResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ResponseBase">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="TotalQueryCount" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="RemainQueryCount" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="ShareSuper" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="Login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:LoginUserData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginResult" type="tns:LoginResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="LoginResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ResponseCode" type="tns:LoginResposeCode" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserData" type="tns:LoginUserData" />
+          <s:element minOccurs="0" maxOccurs="1" name="ServersXmlData" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="LoginResposeCode">
+        <s:restriction base="s:string">
+          <s:enumeration value="SUCCESS" />
+          <s:enumeration value="USER_PWD_ERROR" />
+          <s:enumeration value="IDENTITY_DENIED" />
+          <s:enumeration value="DATE_EXPIRE" />
+          <s:enumeration value="FROZEN" />
+          <s:enumeration value="NO_ENOUGH_MONEY" />
+          <s:enumeration value="SERVICE_ERROR" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="ModifyPassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:ModifyPwdRequest" />
+            <s:element minOccurs="0" maxOccurs="1" name="userData" type="tns:LoginUserData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ModifyPwdRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="NewPwd" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrgPwd" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserId" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ModifyPasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ModifyPasswordResult" type="tns:LoginResposeCode" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryAccount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:QueryAccountRequest" />
+            <s:element minOccurs="0" maxOccurs="1" name="userData" type="tns:LoginUserData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="QueryAccountRequest" />
+      <s:element name="QueryAccountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryAccountResult" type="tns:QueryAccountResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="QueryAccountResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ResponseBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Accounts" type="tns:ArrayOfAccountData" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfAccountData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AccountData" nillable="true" type="tns:AccountData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AccountData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ClientId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LoginName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RealName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Branch" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Balance" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ShareSuper" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExpirationDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreatorId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastLoginTime" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LoginTimes" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateNewAccount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="data" type="tns:AccountData" />
+            <s:element minOccurs="0" maxOccurs="1" name="userData" type="tns:LoginUserData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateNewAccountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateNewAccountResult" type="tns:ResponseCode" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModifyAccount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="data" type="tns:AccountData" />
+            <s:element minOccurs="0" maxOccurs="1" name="userData" type="tns:LoginUserData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModifyAccountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ModifyAccountResult" type="tns:ResponseCode" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AllocateFunds">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userIdAllocatee" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="money" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="userData" type="tns:LoginUserData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AllocateFundsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AllocateFundsResult" type="tns:ResponseCode" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadUnsureData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="data" type="tns:UnsureData" />
+            <s:element minOccurs="0" maxOccurs="1" name="user_data" type="tns:LoginUserData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="UnsureData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Ext2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ext1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RequeryResult" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OperationTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Note" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IdentityCardNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OperatorID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LoginName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UploadUnsureDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UploadUnsureDataResult" type="tns:ResponseCode" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryUnsureData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:QueryUnsureDataRequest" />
+            <s:element minOccurs="0" maxOccurs="1" name="user_data" type="tns:LoginUserData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="QueryUnsureDataRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:PagedRequest">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="DateStart" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="DateEnd" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="OperatorName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdentityCardNumber" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="RequeryResult" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="QueryUnsureDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryUnsureDataResult" type="tns:QueryUnsureDataResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="QueryUnsureDataResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ResponseBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="UnsureDatas" type="tns:ArrayOfUnsureData" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfUnsureData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UnsureData" nillable="true" type="tns:UnsureData" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="QueryUnsureDataCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:QueryUnsureDataRequest" />
+            <s:element minOccurs="0" maxOccurs="1" name="user_data" type="tns:LoginUserData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryUnsureDataCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryUnsureDataCountResult" type="tns:QueryRecordCountResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadTransactionDataAndCompare">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:UploadTransactionDataRequest" />
+            <s:element minOccurs="0" maxOccurs="1" name="user_data" type="tns:LoginUserData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="UploadTransactionDataRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Data" type="tns:TransactionData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TransactionData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OrgId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrgName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SecuId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IdentityCardNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TransactionSummary" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TransactionTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OperationTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Result" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ext1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ext2" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UploadTransactionDataAndCompareResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UploadTransactionDataAndCompareResult" type="tns:ResponseCode" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryTransactionDataCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:QueryTransactionDataRequest" />
+            <s:element minOccurs="0" maxOccurs="1" name="user_data" type="tns:LoginUserData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="QueryTransactionDataRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:PagedRequest">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="OrgId" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="OrgName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SecuId" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CustId" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IdentityCardNumber" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TransactionSummary" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="DateStart" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="DateEnd" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Result" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="QueryTransactionDataCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryTransactionDataCountResult" type="tns:QueryRecordCountResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryTransactionData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:QueryTransactionDataRequest" />
+            <s:element minOccurs="0" maxOccurs="1" name="user_data" type="tns:LoginUserData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryTransactionDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryTransactionDataResult" type="tns:QueryTransactionDataResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="QueryTransactionDataResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ResponseBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Data" type="tns:ArrayOfTransactionData" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfTransactionData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TransactionData" nillable="true" type="tns:TransactionData" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetVersion">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetVersionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetVersionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetVersion_3_5_0202_10">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetVersion_3_5_0202_10Response">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SingleCheckBranchSoapIn">
+    <wsdl:part name="parameters" element="tns:SingleCheckBranch" />
+  </wsdl:message>
+  <wsdl:message name="SingleCheckBranchSoapOut">
+    <wsdl:part name="parameters" element="tns:SingleCheckBranchResponse" />
+  </wsdl:message>
+  <wsdl:message name="SingleCheckSoapIn">
+    <wsdl:part name="parameters" element="tns:SingleCheck" />
+  </wsdl:message>
+  <wsdl:message name="SingleCheckSoapOut">
+    <wsdl:part name="parameters" element="tns:SingleCheckResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryCizitenDataCountSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryCizitenDataCount" />
+  </wsdl:message>
+  <wsdl:message name="QueryCizitenDataCountSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryCizitenDataCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryCizitenDataSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryCizitenData" />
+  </wsdl:message>
+  <wsdl:message name="QueryCizitenDataSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryCizitenDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsCitizenExistsSoapIn">
+    <wsdl:part name="parameters" element="tns:IsCitizenExists" />
+  </wsdl:message>
+  <wsdl:message name="IsCitizenExistsSoapOut">
+    <wsdl:part name="parameters" element="tns:IsCitizenExistsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCitizenDataAndWriteLogSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCitizenDataAndWriteLog" />
+  </wsdl:message>
+  <wsdl:message name="GetCitizenDataAndWriteLogSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCitizenDataAndWriteLogResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCitizenDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCitizenData" />
+  </wsdl:message>
+  <wsdl:message name="GetCitizenDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCitizenDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryHistoryDataSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryHistoryData" />
+  </wsdl:message>
+  <wsdl:message name="QueryHistoryDataSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryHistoryDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryHistoryDataCountSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryHistoryDataCount" />
+  </wsdl:message>
+  <wsdl:message name="QueryHistoryDataCountSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryHistoryDataCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryFeeDataSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryFeeData" />
+  </wsdl:message>
+  <wsdl:message name="QueryFeeDataSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryFeeDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapIn">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModifyPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:ModifyPassword" />
+  </wsdl:message>
+  <wsdl:message name="ModifyPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:ModifyPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryAccountSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryAccount" />
+  </wsdl:message>
+  <wsdl:message name="QueryAccountSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateNewAccountSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateNewAccount" />
+  </wsdl:message>
+  <wsdl:message name="CreateNewAccountSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateNewAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModifyAccountSoapIn">
+    <wsdl:part name="parameters" element="tns:ModifyAccount" />
+  </wsdl:message>
+  <wsdl:message name="ModifyAccountSoapOut">
+    <wsdl:part name="parameters" element="tns:ModifyAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="AllocateFundsSoapIn">
+    <wsdl:part name="parameters" element="tns:AllocateFunds" />
+  </wsdl:message>
+  <wsdl:message name="AllocateFundsSoapOut">
+    <wsdl:part name="parameters" element="tns:AllocateFundsResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadUnsureDataSoapIn">
+    <wsdl:part name="parameters" element="tns:UploadUnsureData" />
+  </wsdl:message>
+  <wsdl:message name="UploadUnsureDataSoapOut">
+    <wsdl:part name="parameters" element="tns:UploadUnsureDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryUnsureDataSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryUnsureData" />
+  </wsdl:message>
+  <wsdl:message name="QueryUnsureDataSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryUnsureDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryUnsureDataCountSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryUnsureDataCount" />
+  </wsdl:message>
+  <wsdl:message name="QueryUnsureDataCountSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryUnsureDataCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadTransactionDataAndCompareSoapIn">
+    <wsdl:part name="parameters" element="tns:UploadTransactionDataAndCompare" />
+  </wsdl:message>
+  <wsdl:message name="UploadTransactionDataAndCompareSoapOut">
+    <wsdl:part name="parameters" element="tns:UploadTransactionDataAndCompareResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryTransactionDataCountSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryTransactionDataCount" />
+  </wsdl:message>
+  <wsdl:message name="QueryTransactionDataCountSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryTransactionDataCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryTransactionDataSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryTransactionData" />
+  </wsdl:message>
+  <wsdl:message name="QueryTransactionDataSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryTransactionDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetVersionSoapIn">
+    <wsdl:part name="parameters" element="tns:GetVersion" />
+  </wsdl:message>
+  <wsdl:message name="GetVersionSoapOut">
+    <wsdl:part name="parameters" element="tns:GetVersionResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetVersion_3_5_0202_10SoapIn">
+    <wsdl:part name="parameters" element="tns:GetVersion_3_5_0202_10" />
+  </wsdl:message>
+  <wsdl:message name="GetVersion_3_5_0202_10SoapOut">
+    <wsdl:part name="parameters" element="tns:GetVersion_3_5_0202_10Response" />
+  </wsdl:message>
+  <wsdl:portType name="IdentifierServiceBranchSoap">
+    <wsdl:operation name="SingleCheckBranch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">单笔查询带机构信息</wsdl:documentation>
+      <wsdl:input message="tns:SingleCheckBranchSoapIn" />
+      <wsdl:output message="tns:SingleCheckBranchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SingleCheck">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">单笔查询</wsdl:documentation>
+      <wsdl:input message="tns:SingleCheckSoapIn" />
+      <wsdl:output message="tns:SingleCheckSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryCizitenDataCount">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">取得缓存数据的记录条数</wsdl:documentation>
+      <wsdl:input message="tns:QueryCizitenDataCountSoapIn" />
+      <wsdl:output message="tns:QueryCizitenDataCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryCizitenData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">取得缓存中的数据</wsdl:documentation>
+      <wsdl:input message="tns:QueryCizitenDataSoapIn" />
+      <wsdl:output message="tns:QueryCizitenDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsCitizenExists">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">是否查询过该用户的资料</wsdl:documentation>
+      <wsdl:input message="tns:IsCitizenExistsSoapIn" />
+      <wsdl:output message="tns:IsCitizenExistsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCitizenDataAndWriteLog">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">取得最近的一次历史记录</wsdl:documentation>
+      <wsdl:input message="tns:GetCitizenDataAndWriteLogSoapIn" />
+      <wsdl:output message="tns:GetCitizenDataAndWriteLogSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCitizenData">
+      <wsdl:input message="tns:GetCitizenDataSoapIn" />
+      <wsdl:output message="tns:GetCitizenDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryHistoryData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">查询消费历史</wsdl:documentation>
+      <wsdl:input message="tns:QueryHistoryDataSoapIn" />
+      <wsdl:output message="tns:QueryHistoryDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryHistoryDataCount">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">查询消费历史(记录条数)</wsdl:documentation>
+      <wsdl:input message="tns:QueryHistoryDataCountSoapIn" />
+      <wsdl:output message="tns:QueryHistoryDataCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryFeeData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">查询余额</wsdl:documentation>
+      <wsdl:input message="tns:QueryFeeDataSoapIn" />
+      <wsdl:output message="tns:QueryFeeDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">用户登录</wsdl:documentation>
+      <wsdl:input message="tns:LoginSoapIn" />
+      <wsdl:output message="tns:LoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyPassword">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">修改密码</wsdl:documentation>
+      <wsdl:input message="tns:ModifyPasswordSoapIn" />
+      <wsdl:output message="tns:ModifyPasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryAccount">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">查询账号</wsdl:documentation>
+      <wsdl:input message="tns:QueryAccountSoapIn" />
+      <wsdl:output message="tns:QueryAccountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewAccount">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">创建一个新的账号</wsdl:documentation>
+      <wsdl:input message="tns:CreateNewAccountSoapIn" />
+      <wsdl:output message="tns:CreateNewAccountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyAccount">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">修改账号资料</wsdl:documentation>
+      <wsdl:input message="tns:ModifyAccountSoapIn" />
+      <wsdl:output message="tns:ModifyAccountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AllocateFunds">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">拨款</wsdl:documentation>
+      <wsdl:input message="tns:AllocateFundsSoapIn" />
+      <wsdl:output message="tns:AllocateFundsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadUnsureData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">上传疑义数据到服务器</wsdl:documentation>
+      <wsdl:input message="tns:UploadUnsureDataSoapIn" />
+      <wsdl:output message="tns:UploadUnsureDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryUnsureData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">查询疑义数据</wsdl:documentation>
+      <wsdl:input message="tns:QueryUnsureDataSoapIn" />
+      <wsdl:output message="tns:QueryUnsureDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryUnsureDataCount">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">查询疑义数据(记录条数)</wsdl:documentation>
+      <wsdl:input message="tns:QueryUnsureDataCountSoapIn" />
+      <wsdl:output message="tns:QueryUnsureDataCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadTransactionDataAndCompare">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">业务数据核查比对</wsdl:documentation>
+      <wsdl:input message="tns:UploadTransactionDataAndCompareSoapIn" />
+      <wsdl:output message="tns:UploadTransactionDataAndCompareSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryTransactionDataCount">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">查询业务数据数据(记录条数)</wsdl:documentation>
+      <wsdl:input message="tns:QueryTransactionDataCountSoapIn" />
+      <wsdl:output message="tns:QueryTransactionDataCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryTransactionData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">查询业务数据数据</wsdl:documentation>
+      <wsdl:input message="tns:QueryTransactionDataSoapIn" />
+      <wsdl:output message="tns:QueryTransactionDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVersion">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">版本号</wsdl:documentation>
+      <wsdl:input message="tns:GetVersionSoapIn" />
+      <wsdl:output message="tns:GetVersionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVersion_3_5_0202_10">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">版本号</wsdl:documentation>
+      <wsdl:input message="tns:GetVersion_3_5_0202_10SoapIn" />
+      <wsdl:output message="tns:GetVersion_3_5_0202_10SoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="IdentifierServiceBranchSoap" type="tns:IdentifierServiceBranchSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SingleCheckBranch">
+      <soap:operation soapAction="http://www.zonrong.org/SingleCheckBranch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SingleCheck">
+      <soap:operation soapAction="http://www.zonrong.org/SingleCheck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryCizitenDataCount">
+      <soap:operation soapAction="http://www.zonrong.org/QueryCizitenDataCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryCizitenData">
+      <soap:operation soapAction="http://www.zonrong.org/QueryCizitenData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsCitizenExists">
+      <soap:operation soapAction="http://www.zonrong.org/IsCitizenExists" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCitizenDataAndWriteLog">
+      <soap:operation soapAction="http://www.zonrong.org/GetCitizenDataAndWriteLog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCitizenData">
+      <soap:operation soapAction="http://www.zonrong.org/GetCitizenData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryHistoryData">
+      <soap:operation soapAction="http://www.zonrong.org/QueryHistoryData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryHistoryDataCount">
+      <soap:operation soapAction="http://www.zonrong.org/QueryHistoryDataCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryFeeData">
+      <soap:operation soapAction="http://www.zonrong.org/QueryFeeData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://www.zonrong.org/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyPassword">
+      <soap:operation soapAction="http://www.zonrong.org/ModifyPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryAccount">
+      <soap:operation soapAction="http://www.zonrong.org/QueryAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewAccount">
+      <soap:operation soapAction="http://www.zonrong.org/CreateNewAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyAccount">
+      <soap:operation soapAction="http://www.zonrong.org/ModifyAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AllocateFunds">
+      <soap:operation soapAction="http://www.zonrong.org/AllocateFunds" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadUnsureData">
+      <soap:operation soapAction="http://www.zonrong.org/UploadUnsureData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUnsureData">
+      <soap:operation soapAction="http://www.zonrong.org/QueryUnsureData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUnsureDataCount">
+      <soap:operation soapAction="http://www.zonrong.org/QueryUnsureDataCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadTransactionDataAndCompare">
+      <soap:operation soapAction="http://www.zonrong.org/UploadTransactionDataAndCompare" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryTransactionDataCount">
+      <soap:operation soapAction="http://www.zonrong.org/QueryTransactionDataCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryTransactionData">
+      <soap:operation soapAction="http://www.zonrong.org/QueryTransactionData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVersion">
+      <soap:operation soapAction="http://www.zonrong.org/GetVersion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVersion_3_5_0202_10">
+      <soap:operation soapAction="http://www.zonrong.org/GetVersion_3_5_0202_10" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="IdentifierServiceBranchSoap12" type="tns:IdentifierServiceBranchSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SingleCheckBranch">
+      <soap12:operation soapAction="http://www.zonrong.org/SingleCheckBranch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SingleCheck">
+      <soap12:operation soapAction="http://www.zonrong.org/SingleCheck" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryCizitenDataCount">
+      <soap12:operation soapAction="http://www.zonrong.org/QueryCizitenDataCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryCizitenData">
+      <soap12:operation soapAction="http://www.zonrong.org/QueryCizitenData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsCitizenExists">
+      <soap12:operation soapAction="http://www.zonrong.org/IsCitizenExists" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCitizenDataAndWriteLog">
+      <soap12:operation soapAction="http://www.zonrong.org/GetCitizenDataAndWriteLog" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCitizenData">
+      <soap12:operation soapAction="http://www.zonrong.org/GetCitizenData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryHistoryData">
+      <soap12:operation soapAction="http://www.zonrong.org/QueryHistoryData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryHistoryDataCount">
+      <soap12:operation soapAction="http://www.zonrong.org/QueryHistoryDataCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryFeeData">
+      <soap12:operation soapAction="http://www.zonrong.org/QueryFeeData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://www.zonrong.org/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyPassword">
+      <soap12:operation soapAction="http://www.zonrong.org/ModifyPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryAccount">
+      <soap12:operation soapAction="http://www.zonrong.org/QueryAccount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateNewAccount">
+      <soap12:operation soapAction="http://www.zonrong.org/CreateNewAccount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyAccount">
+      <soap12:operation soapAction="http://www.zonrong.org/ModifyAccount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AllocateFunds">
+      <soap12:operation soapAction="http://www.zonrong.org/AllocateFunds" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadUnsureData">
+      <soap12:operation soapAction="http://www.zonrong.org/UploadUnsureData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUnsureData">
+      <soap12:operation soapAction="http://www.zonrong.org/QueryUnsureData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUnsureDataCount">
+      <soap12:operation soapAction="http://www.zonrong.org/QueryUnsureDataCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadTransactionDataAndCompare">
+      <soap12:operation soapAction="http://www.zonrong.org/UploadTransactionDataAndCompare" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryTransactionDataCount">
+      <soap12:operation soapAction="http://www.zonrong.org/QueryTransactionDataCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryTransactionData">
+      <soap12:operation soapAction="http://www.zonrong.org/QueryTransactionData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVersion">
+      <soap12:operation soapAction="http://www.zonrong.org/GetVersion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVersion_3_5_0202_10">
+      <soap12:operation soapAction="http://www.zonrong.org/GetVersion_3_5_0202_10" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IdentifierServiceBranch">
+    <wsdl:port name="IdentifierServiceBranchSoap" binding="tns:IdentifierServiceBranchSoap">
+      <soap:address location="http://11.8.40.150/IdentifierServiceBranch.asmx" />
+    </wsdl:port>
+    <wsdl:port name="IdentifierServiceBranchSoap12" binding="tns:IdentifierServiceBranchSoap12">
+      <soap12:address location="http://11.8.40.150/IdentifierServiceBranch.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
