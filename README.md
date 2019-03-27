@@ -30,13 +30,13 @@ VBA接口客户端示例代码
   
 5. TomcatClient
 
-   身份认证服务平台自建接口TomcatClient示例源代码版本，是框架和构建工具无依赖的纯eclipse工程。jdk版本兼容1.6。
+   身份认证服务平台自建接口master-https_单笔身份认证示例Axis相信服务端ssl证书tomcat版本，是框架和构建工具无依赖的纯eclipse工程。jdk版本兼容1.6。
    
    接口文档见[wiki](https://github.com/ITect888/vba_client_demo/wiki)
    
 6. LTClientTest
 
-   身份认证服务平台自建接口TomcatClient示例源代码版本，是框架和构建工具无依赖的纯eclipse工程。jdk版本兼容1.6。
+   身份认证服务平台龙团接口示例源代码版本，是框架和构建工具无依赖的纯eclipse工程。jdk版本兼容1.6。
    
    接口文档见[wiki](https://github.com/ITect888/vba_client_demo/wiki)
    
