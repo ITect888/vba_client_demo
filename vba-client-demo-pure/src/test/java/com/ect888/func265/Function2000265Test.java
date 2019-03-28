@@ -70,8 +70,7 @@ public class Function2000265Test {
 	String usernm="账户类型验证通过";
 	/**
 	 * 手机号
-	 * 选填
-	 * 手机号为空时为三要素验证，非空时为四要素验证
+	 * 必填
 	 */
 	String phoneno="15298386506";
 	
