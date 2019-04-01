@@ -75,12 +75,7 @@ public class FunctionCommonImpl  implements FunctionCommon{
 			}else if(k.startsWith(TO_AES_TO_URL_TO_BASE64_HEAD)) {//2 toAes_toUrl_toBase64_开头的
 				//进行以下处理，步骤为：[a]，用会话密钥加密(AES加密方法);[b].URLEncoder.encode（[a]中加密串）;[c],base64（[b]中字符串）
 				String v2aes=AES.encrypt(v, ENCODE_UTF8,ptyKey);
-				String v2Base64UrlEnAes=null;
-				try {
-					v2Base64UrlEnAes = Base64.toBase64String((URLEncoder.encode(v2aes, ENCODE_UTF8)).getBytes(ENCODE_UTF8));
-				} catch (UnsupportedEncodingException e) {
-					log.error("",e);
-				}
+				String v2Base64UrlEnAes = Base64.toBase64String((URLEncoder.encode(v2aes, ENCODE_UTF8)).getBytes(ENCODE_UTF8));
 				
 				String key=k.replaceFirst(TO_AES_TO_URL_TO_BASE64_HEAD, "");
 				map2Post.put(key, v2Base64UrlEnAes);
