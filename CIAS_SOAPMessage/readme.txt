@@ -1,5 +1,5 @@
 环境：
-Eclipse+JDK 1.6 
+Eclipse+JDK 1.7
 
 文本编码：
 UTF-8

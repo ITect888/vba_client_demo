@@ -45,6 +45,10 @@ public class IdCertExample {
 		// underlying exceptions (file not found, wrong password, wrong keystore
 		// type, ...)
 		System.setProperty("javax.net.ssl.trustStorePassword", "ect888");
+		
+		//支持配置TLSv1.2的版本
+        System.setProperty("https.protocols", "TLSv1.2");
+        System.setProperty("jdk.tls.client.protocols", "TLSv1.2");
 
 		// wsimport -keep ICService.xml
 		// 从WSDL文件ICService.xml中生成com.zhengtong.service.ws的Stub代码

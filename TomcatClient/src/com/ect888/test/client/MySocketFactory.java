@@ -45,7 +45,7 @@ public class MySocketFactory extends JSSESocketFactory {
 		// Install the all-trusting trust manager
 		SSLContext sc = null;
 		try {
-			sc = SSLContext.getInstance("SSL");
+			sc = SSLContext.getInstance("TSLv1.2");
 			sc.init(null, trustAllCerts, new java.security.SecureRandom());
 		} catch (NoSuchAlgorithmException e1) {
 			// TODO Auto-generated catch block
