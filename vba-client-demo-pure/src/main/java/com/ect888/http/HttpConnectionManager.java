@@ -147,7 +147,9 @@ that have been idle over a given period of time.
 								throws CertificateException {
 							return true;
 						}
-					}).build();
+					})//不指明设置protocal则JDK6和JDK7默认为TLSv1，JDK8为TLSv1.2
+					.setProtocol("TLSv1.1")//或TLSv1.2 注：TSLv1.1要求是JDK 6 update 111及以上；TLSv1.2是JDK7以上
+					.build();
 		
         LayeredConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext,
                 NoopHostnameVerifier.INSTANCE);// The NO_OP HostnameVerifier essentially turns hostname verification  off

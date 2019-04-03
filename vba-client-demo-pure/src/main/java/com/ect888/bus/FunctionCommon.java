@@ -37,7 +37,8 @@ public interface FunctionCommon {
 1 toSign_开头的，字段名为title去掉toSign_开头后的值，字段值是以原文形式参加签名，也以原文形式post发送请求的参数；
 2 toAes_toUrl_toBase64_开头的，字段名为title去掉toAes_toUrl_toBase64_开头后的值，字段值是以aes密文形式参加签名，也以aes加密再url编码再base64编码形式post发送请求的参数；
 3 toPicBase64__开头的，字段名为title去掉toPicBase64_开头后的值，字段值不参加签名，并以之为文件路径读入图片base64编码后的字符串post发送请求的参数；
-4 否则，字段名为title，字段值不参加签名，并以原文形式post发送请求的参数；
+4 toUrl_toBase64_开头：字段名为title去掉toUrl_toBase64_开头后的值，字段值不参加签名，并以url编码再base64编码形式post发送请求的参数
+5 否则，字段名为title，字段值不参加签名，并以原文形式post发送请求的参数；
 
 大小写敏感
 	 * 
