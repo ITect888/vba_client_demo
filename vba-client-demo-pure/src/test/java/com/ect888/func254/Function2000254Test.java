@@ -52,7 +52,7 @@ public class Function2000254Test {
 	 * 需用Base64编码
 	 * 不支持1MB以上的图片。
 	 */
-	String videopic=Thread.currentThread().getContextClassLoader().getResource("").getPath()+File.separator+"身份证案例.jpg";
+	String cerfront=Thread.currentThread().getContextClassLoader().getResource("").getPath()+File.separator+"身份证案例.jpg";
 	
 	/**
 	 * 来源渠道，填固定值“0”
@@ -112,7 +112,7 @@ public class Function2000254Test {
 	private Map<String, String> buildParams() {
 		Map<String,String> params=new HashMap<String,String>();
 		
-		params.put(FunctionCommon.TO_PIC_BASE64_HEAD+"cerfront", videopic);
+		params.put(FunctionCommon.TO_PIC_BASE64_HEAD+"cerfront", cerfront);
 		
 		params.put(FunctionCommon.TO_AES_TO_URL_TO_BASE64_HEAD+"certseq", certseq);
 		
