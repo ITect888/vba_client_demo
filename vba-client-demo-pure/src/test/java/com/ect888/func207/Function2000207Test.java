@@ -115,14 +115,8 @@ public class Function2000207Test {
 	 * 
 	 * 将入参，按照http post上送和签名规则，放入map内
 	 * 
-	 * 
-	 * 调用2000207接口时的签名过程：
-	 * 上送参数（biztyp,biztypdesc,certseq,phoneno,placeid,ptyacct,ptycd,sourcechnl,timestamp,key(会话密钥)），其中key前面的是按照字母排序的，key则是要最后附加上去。其中在签名的时候身份证号需要利用会话密钥进行AES加密。
-	 * 生成的防篡改签名sign在接口调用时和业务参数一起上传。"
-	 * 
-	 * 调用2000207实名认证接口：上送参数（biztyp,biztypdesc,certseq,placeid,ptyacct,ptycd,sourcechnl,timestamp, videopic, usernm,funcNo,sign(签名)）
-	 * ，传上述参数时的身份证号要进行以下处理，步骤为：[a]，用会话密钥加密(AES加密方法);[b].URLEncoder.encode（[a]中加密串）;[c],base64（[b]中字符串）  ,身份证正面照需用Base64编码，传上述参数的时候没有顺序要求的。                                                                                                                                                                       
-	 * 
+	 * 加签说明：对参数（acctno，biztyp,biztypdesc,certseq,code，phoneno,placeid,ptyacct,ptycd,sourcechnl,sysseqnb,key(会话密钥)）进行 SHA512签名
+	 * ，其中 key前面的参数按照字母排序，key放置在最后。银行卡号身份证号参与签名时需要利用会话密钥进行AES加密。签名生成签名密钥 sign作为输入参数上送
 	 * 
 	 * @return 将入参，按照http post上送和签名规则，放入map内
 	 */
