@@ -36,7 +36,7 @@ VBA接口客户端示例代码
    
 6. LTClientTest
 
-   身份认证服务平台龙团接口示例源代码版本，是框架和构建工具无依赖的纯eclipse工程。jdk版本兼容1.7及以上。
+   身份认证服务平台龙团接口示例源代码版本，是框架和构建工具无依赖的纯eclipse工程。jdk版本兼容1.6及以上。
    
    接口文档见[wiki](https://github.com/ITect888/vba_client_demo/wiki)
    
