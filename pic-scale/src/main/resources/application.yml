@@ -1,0 +1,11 @@
+#应用配置
+my-app:
+ #压缩图片目标大小，单位B
+ target-size: 30000
+#最大尝试次数
+ try-times: 20
+#支持的文件后缀列表
+ support-suffix:
+  - .jpg
+  - .png
+  
