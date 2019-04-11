@@ -1,0 +1,49 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.4.RELEASE'
+	id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.ect888'
+version = '20190411'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+configurations {
+   providedRuntime
+   // remove default logger
+   all*.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+}
+
+dependencies {
+
+	// https://mvnrepository.com/artifact/com.twelvemonkeys.servlet/servlet
+	compile group: 'com.twelvemonkeys.servlet', name: 'servlet', version: '3.4.1'
+
+	// https://mvnrepository.com/artifact/com.twelvemonkeys.imageio/imageio-jpeg
+	compile group: 'com.twelvemonkeys.imageio', name: 'imageio-jpeg', version: '3.4.1'
+
+	// https://mvnrepository.com/artifact/com.twelvemonkeys.imageio/imageio-bmp
+	compile group: 'com.twelvemonkeys.imageio', name: 'imageio-bmp', version: '3.4.1'
+
+	// https://mvnrepository.com/artifact/com.twelvemonkeys.imageio/imageio-tiff
+	compile group: 'com.twelvemonkeys.imageio', name: 'imageio-tiff', version: '3.4.1'
+
+	// https://mvnrepository.com/artifact/com.twelvemonkeys.imageio/imageio-psd
+	compile group: 'com.twelvemonkeys.imageio', name: 'imageio-psd', version: '3.4.1'
+
+	// https://mvnrepository.com/artifact/net.coobird/thumbnailator
+	compile group: 'net.coobird', name: 'thumbnailator', version: '0.4.8'
+	
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-log4j2
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-log4j2', version: '2.1.4.RELEASE'
+
+	implementation 'org.springframework.boot:spring-boot-starter'	
+	compileOnly 'org.projectlombok:lombok'
+	testCompileOnly 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
