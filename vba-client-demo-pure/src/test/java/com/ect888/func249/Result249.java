@@ -68,7 +68,7 @@ public class Result249 {
 	 */
 	private String respinfo;
 	/**
-	 * 订单处理状态
+	 * 保留字段
 	 */
 	private String status;
 	/**

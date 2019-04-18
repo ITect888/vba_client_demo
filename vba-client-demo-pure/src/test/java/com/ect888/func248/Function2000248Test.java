@@ -206,24 +206,15 @@ public class Function2000248Test {
 				 throw new IllegalStateException("异常，系统级调用成功，却无结果，健壮性考虑，留此分支,联系服务端");
 			 
 			 Result248 re=json.getResults().get(0);
-			 String status=re.getStatus();
-			 if("00".equals(status)) {//订单成功结束,开始业务处理，此处示例打印主要业务应答结果
+			 
+			 log.info("业务应答码respcd="+re.getRespcd());
+			 log.info("业务应答信息respinfo="+re.getRespinfo());
+			 
+			 if("48000".equals(re.getRespcd())) {
+				 log.info("cmpResult结果"+re.getCmpResult());
 				 CmpResult cmpResult = JSON.parseObject(re.getCmpResult(),CmpResult.class);
-				 
-				 System.out.println("订单成功结束");
-				 System.out.println("业务应答码respcd="+re.getRespcd());
-				 System.out.println("业务应答信息respinfo="+re.getRespinfo());
-				 System.out.println("cmpResult结果"+re.getCmpResult());
-				 System.out.println("身份证号认证结果resCertSeq="+cmpResult.getResCertSeq());
-				 System.out.println("姓名认证结果resName="+cmpResult.getResName());
-			 }else if("03".equals(status)) {//订单业务性失败结束,开始业务处理，此处示例打印主要业务应答结果
-				 System.out.println("订单业务性失败结束");
-				 System.out.println("业务应答码respcd="+re.getRespcd());
-				 System.out.println("业务应答信息respinfo="+re.getRespinfo());
-			 }else if("01".equals(status)){//订单处理中，请稍后再轮询查询
-				 log.info("订单处理中，请稍后再轮询查询");
-			 }else {//异常，未知返回码，健壮性考虑，留此分支,联系服务端
-				 throw new IllegalStateException("异常，未知返回码,联系服务端");
+				 log.info("身份证号认证结果resCertSeq="+cmpResult.getResCertSeq());
+				 log.info("姓名认证结果resName="+cmpResult.getResName());
 			 }
 		 }else{//系统级调用失败，异常，查看入参或者联系服务端
 			 throw new IllegalStateException("系统级调用失败，异常，查看入参或者联系服务端");

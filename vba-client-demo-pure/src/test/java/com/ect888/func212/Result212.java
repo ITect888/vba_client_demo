@@ -36,7 +36,7 @@ public class Result212 {
 	 */
 	private String biztyp;
 	/**
-	 * 订单处理状态
+	 * 保留字段
 	 */
 	private String status;
 	/**

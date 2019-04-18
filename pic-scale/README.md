@@ -24,3 +24,9 @@
   - springboot+gradle
 
   
+
+* jar包打开方式
+
+右键-打开方式-选择Java如下
+
+![](jar_run_way_Java.png)

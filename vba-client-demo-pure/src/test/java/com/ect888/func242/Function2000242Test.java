@@ -164,25 +164,17 @@ public class Function2000242Test {
 				 throw new IllegalStateException("异常，系统级调用成功，却无结果，健壮性考虑，留此分支,联系服务端");
 			 
 			 Result242 re=json.getResults().get(0);
-			 String status=re.getStatus();
-			 if("00".equals(status)) {//订单成功结束,开始业务处理，此处示例打印主要业务应答结果
-				 System.out.println("订单成功结束");
-				 System.out.println("业务应答码respcd="+re.getRespcd());
-				 System.out.println("业务应答信息respinfo="+re.getRespinfo());
-				 System.out.println("访问频次visit_frequency_day_level="+re.getVisit_frequency_day_level());
-				 System.out.println("活跃天数frequency_day="+re.getFrequency_day());
-				 System.out.println("不活跃天数inactive_day="+re.getInactive_day());
-				 System.out.println("常访地址类型addr_label="+re.getAddr_label());
-				 System.out.println("是否是常访地址fre_location="+re.getFre_location());
-			 }else if("03".equals(status)) {//订单业务性失败结束,开始业务处理，此处示例打印主要业务应答结果
-				 System.out.println("订单业务性失败结束");
-				 System.out.println("业务应答码respcd="+re.getRespcd());
-				 System.out.println("业务应答信息respinfo="+re.getRespinfo());
-			 }else if("01".equals(status)){//订单处理中，请稍后再轮询查询
-				 log.info("订单处理中，请稍后再轮询查询");
-			 }else {//异常，未知返回码，健壮性考虑，留此分支,联系服务端
-				 throw new IllegalStateException("异常，未知返回码,联系服务端");
-			 }
+			 log.info("订单成功结束");
+			 log.info("业务应答码respcd="+re.getRespcd());
+			 log.info("业务应答信息respinfo="+re.getRespinfo());
+			 
+			 if("42000".equals(re.getRespcd())) {
+				 log.info("访问频次visit_frequency_day_level="+re.getVisit_frequency_day_level());
+				 log.info("活跃天数frequency_day="+re.getFrequency_day());
+				 log.info("不活跃天数inactive_day="+re.getInactive_day());
+				 log.info("常访地址类型addr_label="+re.getAddr_label());
+				 log.info("是否是常访地址fre_location="+re.getFre_location());
+			}
 		 }else{//系统级调用失败，异常，查看入参或者联系服务端
 			 throw new IllegalStateException("系统级调用失败，异常，查看入参或者联系服务端");
 		 }

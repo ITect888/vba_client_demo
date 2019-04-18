@@ -5,7 +5,6 @@ import java.awt.GridLayout;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -46,7 +45,7 @@ public class FrameMain extends JFrame {
 	final JTextArea textaera = new JTextArea();
 
 	final JButton sendButton = new JButton("缩放");
-	final JButton fileInput = new JButton("输入目录");
+	final JButton fileInput = new JButton("输入文件");
 	final JButton dirOutput = new JButton("输出目录");
 	final JButton clearButton = new JButton("清空日志");
 	
@@ -174,7 +173,7 @@ public class FrameMain extends JFrame {
 			while (true) {
 				String hints=null;
 				try {
-					hints = Util.queue.poll(200, TimeUnit.MILLISECONDS);
+					hints = Util.queue.take();//一直阻塞
 				} catch (InterruptedException e) {
 					log.error("", e);
 					return;

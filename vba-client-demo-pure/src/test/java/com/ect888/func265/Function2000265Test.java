@@ -167,20 +167,8 @@ public class Function2000265Test {
 				 throw new IllegalStateException("异常，系统级调用成功，却无结果，健壮性考虑，留此分支,联系服务端");
 			 
 			 Result265 re=json.getResults().get(0);
-			 String status=re.getStatus();
-			 if("00".equals(status)) {//订单成功结束,开始业务处理，此处示例打印主要业务应答结果
-				 log.info("订单成功结束");
-				 log.info("业务应答码respcd="+re.getRespcd());
-				 log.info("业务应答信息respinfo="+re.getRespinfo());
-			 }else if("03".equals(status)) {//订单业务性失败结束,开始业务处理，此处示例打印主要业务应答结果
-				 log.info("订单业务性失败结束");
-				 log.info("业务应答码respcd="+re.getRespcd());
-				 log.info("业务应答信息respinfo="+re.getRespinfo());
-			 }else if("01".equals(status)){//订单处理中，请稍后再轮询查询
-				 log.info("订单处理中，请稍后再轮询查询");
-			 }else {//异常，未知返回码，健壮性考虑，留此分支,联系服务端
-				 throw new IllegalStateException("异常，未知返回码,联系服务端");
-			 }
+			 log.info("业务应答码respcd="+re.getRespcd());
+			 log.info("业务应答信息respinfo="+re.getRespinfo());
 		 }else{//系统级调用失败，异常，查看入参或者联系服务端
 			 throw new IllegalStateException("系统级调用失败，异常，查看入参或者联系服务端");
 		 }

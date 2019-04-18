@@ -6,7 +6,7 @@ plugins {
 apply plugin: 'io.spring.dependency-management'
 
 group = 'com.ect888'
-version = '20190411'
+version = '20190418'
 sourceCompatibility = '1.8'
 
 repositories {
