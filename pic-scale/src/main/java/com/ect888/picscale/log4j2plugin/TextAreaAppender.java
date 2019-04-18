@@ -2,6 +2,7 @@ package com.ect888.picscale.log4j2plugin;
 
 
 import java.io.Serializable;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.logging.log4j.core.Filter;
 import org.apache.logging.log4j.core.Layout;
@@ -34,7 +35,11 @@ public class TextAreaAppender extends AbstractAppender {
     public void append(LogEvent event) {
         final byte[] bytes = getLayout().toByteArray(event);//日志二进制文件，输出到指定位置就行
         //下面这个是要实现的自定义逻辑
-        Util.queue.offer(new String(bytes));
+        try {
+			Util.queue.offer(new String(bytes),200,TimeUnit.MILLISECONDS);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
     }
  
     // 下面这个方法可以接收配置文件中的参数信息
