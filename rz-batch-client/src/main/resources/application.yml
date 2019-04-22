@@ -1,0 +1,115 @@
+#VBA数据库配置
+spring:
+ datasource:
+  dynamic:
+   primary: mysql
+   datasource:
+    mysql:
+     username: vbaonldb
+     password: admin1234
+     driver-class-name: com.mysql.cj.jdbc.Driver
+     url: jdbc:mysql://11.12.13.224:3306/vbaonldb?serverTimezone=Hongkong
+
+#应用配置
+my-app:
+ #VBA访问地址
+ url: http://11.8.40.161:8090/servlet/json
+#并发量，每个输入文件一个线程池，因此是只针对这个输入文件的并发量限制。
+ n-threads: 10
+#输入文件或者文件夹
+ input: 自动验证小程序入参_模板/自动验证小程序入参_模板239.xlsx
+#输出文件的文件名前缀
+ output-file-name-prefix: 20190330output_
+#模式："机构跑批"还是"自动验证小程序"
+ mode: 自动验证小程序
+#指定发送笔数，大于0有效，小于等于0则只发送excel已有数据的量
+ spec-num2-post: 0
+  
+#####针对机构跑批入参_模板的title到自动验证小程序入参_模板字段名的转换和账户接口号配置
+title-trans: 
+###账户接口号配置
+ ptyacct: ciasacct
+ ptycd: "0000100000"
+ pty-key: ectsitectsitectsitectsitectsitectsit
+ func-no: 2000207
+### 是否调用N次102结果查询 
+ one-plus-n: true
+#中文title换为字段名的映射
+#字段名规则为：
+##toSign_开头：字段名为title去掉toSign_开头后的值，字段值是以原文形式参加签名，也以原文形式post发送请求的参数。
+##toAes_toUrl_toBase64_开头：字段名为title去掉toAes_toUrl_toBase64_开头后的值，字段值是以aes密文形式参加签名，也以aes加密再url编码再base64编码形式post发送请求的参数。
+##toPicBase64__开头：字段名为title去掉toPicBase64_开头后的值，字段值不参加签名，并以之为文件路径读入图片base64编码后的字符串post发送请求的参数。
+##toUrl_toBase64_开头：字段名为title去掉toUrl_toBase64_开头后的值，字段值不参加签名，并以url编码再base64编码形式post发送请求的参数。
+ chi2field-list:
+   - chi: 身份证
+     field: toAes_toUrl_toBase64_certseq
+   - chi: 银行卡
+     field: toAes_toUrl_toBase64_acctno
+   - chi: 姓名
+     field: usernm
+   - chi: 手机号
+     field: toSign_phoneno
+#接口必填字段输入参数中， 机构跑批入参_模板没有，取固定值的字段.
+#是否aes加密再url编码再base64编码形式post，是否文件路径读入图片base64编码后的字符串post，
+#相应的添加toSign_开头，oAes_toUrl_toBase64_开头，toPicBase64__开头
+ field-omit-list:
+   - chi: ""
+     field: toSign_code
+   - chi: ""
+     field: toSign_sysseqnb
+   - chi: "0"
+     field: toSign_sourcechnl
+   - chi: "0"
+     field: toSign_biztypdesc
+   - chi: "0"
+     field: toSign_biztyp
+   - chi: "0"
+     field: toSign_placeid
+  
+#机构跑批响应结果的提取  
+resp-extract:
+#从响应结果中提取的字段及其对应输出中文title
+  field2chi-list:
+   - chi: 返回码
+     field: respcd
+   - chi: 返回信息
+     field: respinfo
+   - chi: 交易状态
+     field: status     
+#提取的字段中，字段值需要中文映射的     
+  field2value2chi-list:
+   - field: resultdata
+#字段值到中文映射   	
+     value2chi-list: 
+      - value: "0"
+        chi: 一致
+      - value: "1"
+        chi: 不一致   
+   - field: status
+#字段值到中文映射   	
+     value2chi-list: 
+      - value: "03"
+        chi: 失败结束
+      - value: "00"
+        chi: 成功结束        
+
+#######技术性参数
+####使用的log4j2配置文件
+logging:
+ config: ./log4j2-spring.xml
+####http线程池和代理
+my-http:
+#最大线程数
+ max-total: 250
+# 每个网络路由的最大数
+ default-max-per-route: 200
+#尝试关闭空闲网络连接的时间间隔，单位毫秒
+ closeIdle-connections: 600000000
+# 对服务端连接的默认keepalive时间，单位秒
+ keep-alive-default: 300000000
+#是否走代理
+ proxy: false
+#need proxy true 启动代理时的代理IP
+ squid-ip:  
+#need proxy true 启动代理时的代理端口
+ squid-port: 0 
