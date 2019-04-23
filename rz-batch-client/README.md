@@ -115,7 +115,7 @@ java -jar rz-batch-client-yyyymmdd.jar
    以手机实名认证为例
    
    ```yml
-resp-extract:     
+   resp-extract:     
     field2value2chi-list:
       - field: resultdata	
         value2chi-list: 
