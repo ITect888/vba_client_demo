@@ -36,7 +36,7 @@ public class Function2000006Test {
 	private PoolClient client=PoolClient.getInstance();
 	
 	public void doWork() throws Exception {
-		//组装参数，第一次修改密码时ptypwd传空，非第一次修改密码时ptypwd不能为空或者不传。注：账户密码并不参与业务交易，只用于修改会话秘钥;
+		//组装参数，第一次修改密码时ptypwd传空字符串，非第一次修改密码时ptypwd不能为空字符串或者不传。注：账户密码并不参与业务交易，只用于修改会话秘钥;
 		String data = "ptyacct="+config.getPtyacct()
 		+"&ptycd="+config.getPtycd()+"&newptypwd="+config.getNewPtyPwd()
 		+"&ptypwd="+config.getPtyPwd();
