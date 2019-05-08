@@ -2,6 +2,7 @@ package com.ect888.bus.view;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 import com.ect888.bus.view.impl.MyInputExcelRowColData;
 import com.ect888.controller.Controller;
@@ -18,15 +19,7 @@ import com.ect888.controller.Controller;
  *
  */
 public interface CallBack {
-	/**
-	 * 
-	 * 处理每行读入数据；交给控制层
-	 * 
-	 * @param rowNum
-	 * @param row
-	 */
-	void process(int rowNum,Collection<MyInputExcelRowColData> row);
-	
+
 	/**
 	 * 
 	 * 得到输出title
@@ -42,4 +35,18 @@ public interface CallBack {
 	 * @param controller
 	 */
 	void setController(Controller controller);
+
+	/**
+	 * 
+	 * 处理每行读入数据；交给控制层
+	 * 
+	 * @param rowNum
+	 * @param row
+	 */
+	void process(int rowNum, Collection<MyInputExcelRowColData> row);
+	
+	/**
+	 * @param cd
+	 */
+	void setCountDownLatch(CountDownLatch cd);
 }

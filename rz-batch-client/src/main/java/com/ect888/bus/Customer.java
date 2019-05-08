@@ -2,6 +2,7 @@ package com.ect888.bus;
 
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.CompletableFuture;
 
 import com.ect888.controller.Controller;
 import com.ect888.view.excel.ExcelWriter;
@@ -22,5 +23,5 @@ public interface Customer {
 	 * @param blockQueue
 	 * @return
 	 */
-	boolean consume(Controller controller,ExcelWriter excelWriter,BlockingQueue<List<String>> blockQueue);
+	boolean consume(CompletableFuture<Void> thread2,Controller controller,ExcelWriter excelWriter,BlockingQueue<List<String>> blockQueue);
 }

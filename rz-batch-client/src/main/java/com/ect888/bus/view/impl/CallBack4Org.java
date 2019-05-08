@@ -5,11 +5,14 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
+import com.ect888.BatchClient4OneExcel;
 import com.ect888.bus.OrgUtil;
 import com.ect888.bus.Util;
 import com.ect888.bus.impl.ChangelessOutput;
@@ -30,11 +33,14 @@ import lombok.extern.slf4j.Slf4j;
  * 
  * 不是线程安全的
  * 
+ * 原型模式
+ * 
  * @author fanyj
  *
  */
 @Component
 @Slf4j
+@Scope("prototype")
 public class CallBack4Org implements CallBack {
 	
 	private Controller controller;
@@ -50,6 +56,8 @@ public class CallBack4Org implements CallBack {
 	 */
 	private Map<Integer,String> titleMap; 
 	
+	private CountDownLatch cd;
+	
 	@Override
 	public void process(int rowNum,Collection<MyInputExcelRowColData> row) {
 		if(0>=rowNum) {//A 第一行为中文title
@@ -58,6 +66,9 @@ public class CallBack4Org implements CallBack {
 		}
 		
 		outPutTitles=produceOutPutTitle();
+		if(null!=cd) {
+			cd.countDown();//完成了outPutTitles的产生，才能写出到excel
+		}
 		
 		//B 第二行开始为数据 数据的处理
 		InputRowData inputRowData=processDataRow(titleMap,row);
@@ -205,6 +216,11 @@ public class CallBack4Org implements CallBack {
 	@Override
 	public void setController(Controller controller) {
 		this.controller=controller;
+	}
+
+	@Override
+	public void setCountDownLatch(CountDownLatch cd) {
+		this.cd=cd;
 	}
 	
 }

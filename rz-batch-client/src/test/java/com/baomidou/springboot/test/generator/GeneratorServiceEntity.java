@@ -64,7 +64,7 @@ public class GeneratorServiceEntity {
 		StrategyConfig strategyConfig = new StrategyConfig();
 		strategyConfig.setCapitalMode(true)
 				.setColumnNaming(NamingStrategy.underline_to_camel)
-				.setNaming(NamingStrategy.nochange)//防止tbl_vbaonl_trans_2被弄成tbl_vbaonl_trans2
+				.setNaming(NamingStrategy.no_change)//防止tbl_vbaonl_trans_2被弄成tbl_vbaonl_trans2
 				.setEntityLombokModel(true)
 				.setRestControllerStyle(true)
 				//.setSuperControllerClass("com.baomidou.ant.common.BaseController")

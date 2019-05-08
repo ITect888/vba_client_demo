@@ -13,8 +13,6 @@ import org.springframework.context.annotation.ComponentScan;
 
 import com.alibaba.fastjson.JSON;
 import com.ect888.bus.Util;
-import com.ect888.bus.impl.FactoryImpl;
-import com.ect888.bus.view.CallBack;
 import com.ect888.config.Config;
 import com.ect888.http.PoolClient;
 
@@ -36,9 +34,6 @@ public class RzBatchClientApplication  implements CommandLineRunner{
 	@Autowired
 	private Config config;
 	
-	@Autowired
-	private FactoryImpl factory;
-
 	@Override
 	public void run(String... args) throws Exception {
 		
@@ -52,13 +47,11 @@ public class RzBatchClientApplication  implements CommandLineRunner{
 
 		log.info("start process...config="+JSON.toJSONString(config));
 		
-		CallBack callBack=factory.factoryCallBack(mode);
-		
 		int batchId=0;//批次序列号
 		try {
 			do{
 				log.info("第"+batchId+"批次...");
-				doWork(mode,callBack);
+				doWork(mode);
 				batchId++;
 			}while(specNum2Post>Util.INVOKE_SEQ.get());//lowLimit>Util.INVOKE_SEQ.get()其中后者大于等于0，故前者大于0有效，小于等于0则只发送excel已有数据的量
 		}finally {
@@ -76,7 +69,7 @@ public class RzBatchClientApplication  implements CommandLineRunner{
 	 * 
 	 * @param mode
 	 */
-	private void doWork(String mode,CallBack callBack) {
+	private void doWork(String mode) {
 		File file=new File(config.getInput());
 		
 		File[] fs=null;
@@ -98,7 +91,7 @@ public class RzBatchClientApplication  implements CommandLineRunner{
 			}
 			
 			try {
-				batchClient4OneExcel.doWork(mode,f,callBack);
+				batchClient4OneExcel.doWork(mode,f);
 			}catch(Exception e) {
 				log.info("文件处理失败"+f.getAbsolutePath(),e);
 			}

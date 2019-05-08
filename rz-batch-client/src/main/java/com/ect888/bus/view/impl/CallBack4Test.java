@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.OptionalInt;
+import java.util.concurrent.CountDownLatch;
 import java.util.stream.IntStream;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
@@ -62,11 +64,14 @@ import lombok.extern.slf4j.Slf4j;
  * 
  * 不是线程安全的
  * 
+ * 原型模式
+ * 
  * @author fanyj
  *
  */
 @Component
 @Slf4j
+@Scope("prototype")
 public class CallBack4Test implements CallBack {
 	
 	private Controller controller;
@@ -92,6 +97,8 @@ public class CallBack4Test implements CallBack {
 	 */
 	private Map<Integer,String> titleMap; 
 	
+	private CountDownLatch cd;
+	
 	@Override
 	public void process(int rowNum,Collection<MyInputExcelRowColData> row) {
 		if(0>=rowNum) {
@@ -102,6 +109,9 @@ public class CallBack4Test implements CallBack {
 		if(1==rowNum) {
 			titleMap=processTitleRow(row);
 			outPutTitles=produceOutPutTitle(titleMap, typeRowMap.getExpected());
+			if(null!=cd) {
+				cd.countDown();//完成了outPutTitles的产生，才能写出到excel
+			}
 			return;
 		}
 		
@@ -415,8 +425,6 @@ public class CallBack4Test implements CallBack {
 		return type;
 	}
 
-
-
 	@Override
 	public List<List<String>> getOutPutTitle() {
 		return outPutTitles;
@@ -428,4 +436,8 @@ public class CallBack4Test implements CallBack {
 		this.controller=controller;
 	}
 	
+	@Override
+	public void setCountDownLatch(CountDownLatch cd) {
+		this.cd=cd;
+	}
 }
