@@ -48,7 +48,9 @@ public class WorkerImpl4Org implements Worker{
 		boolean flag=false;
 		try {
 			do {
+				log.info("to blockingQueue.offer(inputRowData,200,TimeUnit.MILLISECONDS) ");
 				flag = blockingQueue.offer(result,200,TimeUnit.MILLISECONDS);
+				log.info("done blockingQueue.offer(inputRowData,200,TimeUnit.MILLISECONDS) flag="+flag);
 			}while(!flag);
 		} catch (InterruptedException e) {
 			log.error("",e);

@@ -5,11 +5,13 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.alibaba.fastjson.JSON;
 import com.ect888.bus.Util;
 import com.ect888.bus.Worker;
 import com.ect888.bus.impl.FactoryImpl;
@@ -42,16 +44,54 @@ public class ThreadControllerImpl implements Controller {
 	
 	public void initThreadPool(int nThreads) {
 		invokeThreadPool = Executors.newFixedThreadPool(nThreads);
+		blockQueue4Excel=new LinkedBlockingQueue<>(nThreads);//yml中参数化
+	}
+	
+	public boolean summit(InputRowData inputRowData) {
+		if(null==inputRowData) {
+			return false;
+		}
+		
+		long seqNum = Util.INVOKE_SEQ.addAndGet(1);
+		long specNum2Post=config.getSpecNum2Post();//指定发送笔数，大于0有效，小于等于0则只发送excel已有数据的量
+		if(specNum2Post>0&&seqNum>specNum2Post) {
+			log.warn("超过指定笔数"+specNum2Post+"不再发送.当前seqNum="+seqNum);
+			return false;
+		}
+		
+		Worker worker=factory.factoryWorker(mode, blockQueue, inputRowData);
+		String seq = seqNum + Util.SPLIT;
+		
+		worker.setSeq(seq);
+		
+		log.info(seq+" add to submit inputRowData="+inputRowData);
+		invokeThreadPool.submit(worker);
+		log.info(seq+" submited inputRowData="+inputRowData);
+		
+		return true;
+		
 	}
 	
 	private String mode;
 	
+	/**
+	 * 
+	 */
 	private BlockingQueue<List<String>> blockQueue;
 	
 	public ThreadControllerImpl() {
 		blockQueue=new LinkedBlockingQueue<>();
 	}
 	
+	/**
+	 * 缓存待请求的数据，最多nThreads个，满了就等待
+	 */
+	private BlockingQueue<InputRowData> blockQueue4Excel;
+	
+	public BlockingQueue<InputRowData> getBlockQueue4Excel() {
+		return blockQueue4Excel;
+	}
+
 	@Override
 	public BlockingQueue<List<String>> getBlockQueue() {
 		return blockQueue;
@@ -65,20 +105,23 @@ public class ThreadControllerImpl implements Controller {
 	
 	@Override
 	public boolean invoke(InputRowData inputRowData) {
-
-		long seqNum = Util.INVOKE_SEQ.addAndGet(1);
-		long specNum2Post=config.getSpecNum2Post();//指定发送笔数，大于0有效，小于等于0则只发送excel已有数据的量
-		if(specNum2Post>0&&seqNum>specNum2Post) {
-			log.warn("超过指定笔数"+specNum2Post+"不再发送.当前seqNum="+seqNum);
+		boolean flag=false;
+		
+		try {
+			do {
+//				log.info("to blockQueue4Excel.put(inputRowData)... ");
+//				blockQueue4Excel.put(inputRowData);//满了就等待,阻塞
+//				log.info("done blockQueue4Excel.put(inputRowData)");
+				log.info("to blockQueue4Excel.offer(inputRowData,200,TimeUnit.MILLISECONDS) ");
+				flag = blockQueue4Excel.offer(inputRowData,200,TimeUnit.MILLISECONDS);
+				log.info("done blockQueue4Excel.offer(inputRowData,200,TimeUnit.MILLISECONDS) flag="+flag);
+			}while(!flag);
+			
+		} catch (InterruptedException e) {
+			log.error("",e);
 			return false;
 		}
-		
-		Worker worker=factory.factoryWorker(mode, blockQueue, inputRowData);
-		String seq = seqNum + Util.SPLIT;
-		log.info(seq+" add to submit inputRowData="+inputRowData);
-		worker.setSeq(seq);
-		invokeThreadPool.submit(worker);
-		
+
 		return true;
 	}
 
@@ -89,7 +132,7 @@ public class ThreadControllerImpl implements Controller {
 
 	@Override
 	public boolean isTerminated() {
-		return invokeThreadPool.isTerminated();
+		return invokeThreadPool.isTerminated()&&blockQueue4Excel.isEmpty();
 	}
 
 	@Override

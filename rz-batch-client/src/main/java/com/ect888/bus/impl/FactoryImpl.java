@@ -38,23 +38,11 @@ public class FactoryImpl implements Factory{
 	@Override
 	public CallBack factoryCallBack(String mode) {
 		if(MODE_TEST.equals(mode)) {
-			return testCallBack;
+			return applicationContext.getBean(CallBack4Test.class);//自动验证小程序入参输入读入处理和输出title构建
 		}
-		return orgCallBack;
+		return  applicationContext.getBean(CallBack4Org.class);//机构跑批入参输入读入处理和输出title构建
 	}
 	
-	/**
-	 * 机构跑批入参输入读入处理和输出title构建
-	 */
-	@Autowired
-	private CallBack4Org orgCallBack;
-	
-	/**
-	 * 自动验证小程序入参输入读入处理和输出title构建
-	 */
-	@Autowired
-	private CallBack4Test testCallBack;
-
 	@Autowired
     private ApplicationContext applicationContext;
 	
