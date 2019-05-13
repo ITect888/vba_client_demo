@@ -159,16 +159,15 @@ public class Function2000266Test {
 			 log.info("业务应答信息code="+re.getCode());
 			 log.info("业务应答信息code="+re.getScore());
 			 
-			 if(null==json.getDetail_1_1()||json.getDetail_1_1().isEmpty()||null==json.getDetail_1_1().get(0))//异常，系统级调用成功，却无结果，健壮性考虑，留此分支,联系服务端
+			 if(null==json.getDetail_10()||json.getDetail_10().isEmpty()||null==json.getDetail_10().get(0))//异常，系统级调用成功，却无结果，健壮性考虑，留此分支,联系服务端
 				 throw new IllegalStateException("异常，系统级调用成功，却无套餐中服务编号为1_0的结果，健壮性考虑，留此分支,联系服务端");
 			 
-			 Detail_1_1 d1=json.getDetail_1_1().get(0);
+			 Detail_10 d1=json.getDetail_10().get(0);
 			 log.info("业务应答信息respcd="+d1.getRespcd());
 			 log.info("业务应答信息auth="+d1.getAuth());
 			 log.info("业务应答信息respinfo="+d1.getRespinfo());
-			 log.info("业务应答信息mpssim="+d1.getMpssim());
-			 log.info("业务应答信息usernm="+d1.getUsernm());
-			 log.info("业务应答信息certseq="+d1.getCertseq());
+			 log.info("业务应答信息phoneOperator="+d1.getPhoneOperator());
+			 log.info("业务应答信息phoneProvCity="+d1.getPhoneProvCity());
 				 
 			 if(null==json.getDetail_2()||json.getDetail_2().isEmpty()||null==json.getDetail_2().get(0))//异常，系统级调用成功，却无结果，健壮性考虑，留此分支,联系服务端
 				 throw new IllegalStateException("异常，系统级调用成功，却无套餐中服务编号为2的结果，健壮性考虑，留此分支,联系服务端");
