@@ -157,6 +157,7 @@ public class Function2000266Test {
 			 log.info("业务应答码sysseqnb="+re.getSysseqnb());
 			 log.info("业务应答信息level="+re.getLevel());
 			 log.info("业务应答信息code="+re.getCode());
+			 log.info("业务应答信息code="+re.getScore());
 			 
 			 if(null==json.getDetail_1_1()||json.getDetail_1_1().isEmpty()||null==json.getDetail_1_1().get(0))//异常，系统级调用成功，却无结果，健壮性考虑，留此分支,联系服务端
 				 throw new IllegalStateException("异常，系统级调用成功，却无套餐中服务编号为1_0的结果，健壮性考虑，留此分支,联系服务端");
