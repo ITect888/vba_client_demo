@@ -13,9 +13,20 @@ public class Result266 {
 	 */
 	private String sysseqnb;
 	
+	/**
+	 * 风险信用安全等级
+	 */
 	private String level;
 	
+	/**
+	 * 业务响应码
+	 */
 	private String code;
+	
+	/**
+	 * 分数
+	 */
+	private String score;
 
 	public String getLevel() {
 		return level;
@@ -40,5 +51,15 @@ public class Result266 {
 	public void setSysseqnb(String sysseqnb) {
 		this.sysseqnb = sysseqnb;
 	}
+
+	public String getScore() {
+		return score;
+	}
+
+	public void setScore(String score) {
+		this.score = score;
+	}
+	
+	
 	
 }

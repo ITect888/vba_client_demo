@@ -29,6 +29,16 @@ public class Json266 extends JsonCommon{
 	private ArrayList<Detail_2> detail_2;
 	
 	private ArrayList<Detail_5> detail_5;
+	
+	private ArrayList<Detail_10> detail_10;
+
+	public ArrayList<Detail_10> getDetail_10() {
+		return detail_10;
+	}
+
+	public void setDetail_10(ArrayList<Detail_10> detail_10) {
+		this.detail_10 = detail_10;
+	}
 
 	public ArrayList<Detail_1> getDetail_1() {
 		return detail_1;
