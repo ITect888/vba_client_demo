@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.alibaba.fastjson.JSON;
 import com.ect888.bus.Util;
 import com.ect888.bus.Worker;
 import com.ect888.bus.impl.FactoryImpl;
@@ -47,6 +46,10 @@ public class ThreadControllerImpl implements Controller {
 		blockQueue4Excel=new LinkedBlockingQueue<>(nThreads);//yml中参数化
 	}
 	
+	/**
+	 * @param inputRowData
+	 * @return
+	 */
 	public boolean summit(InputRowData inputRowData) {
 		if(null==inputRowData) {
 			return false;
@@ -54,9 +57,24 @@ public class ThreadControllerImpl implements Controller {
 		
 		long seqNum = Util.INVOKE_SEQ.addAndGet(1);
 		long specNum2Post=config.getSpecNum2Post();//指定发送笔数，大于0有效，小于等于0则只发送excel已有数据的量
-		if(specNum2Post>0&&seqNum>specNum2Post) {
-			log.warn("超过指定笔数"+specNum2Post+"不再发送.当前seqNum="+seqNum);
-			return false;
+		if(specNum2Post>0) {
+			if(seqNum>specNum2Post) {
+				log.warn("超过指定笔数"+specNum2Post+"不再发送.当前seqNum="+seqNum);
+				return false;
+			}
+			
+			if(specNum2Post>0) {
+				if(config.getSpecNum2PostDuration()>0) {//指定spec-num2-post笔交易数第一笔和最后一笔的间隔时长，其间的交易时间上均匀分布，spec-num2-post和spec-num2-post-duration大于0有效，单位分钟
+					long timeMillSec=(config.getSpecNum2PostDuration()*60000)/specNum2Post;
+					log.info("to wait millsecs "+timeMillSec);
+					try {
+						Thread.sleep(timeMillSec);
+					} catch (InterruptedException e) {
+						log.error("",e);
+					}
+					log.info("done for waitting millsecs "+timeMillSec);
+				}
+			}
 		}
 		
 		Worker worker=factory.factoryWorker(mode, blockQueue, inputRowData);
