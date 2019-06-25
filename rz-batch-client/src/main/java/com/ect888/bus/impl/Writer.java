@@ -60,9 +60,9 @@ public class Writer implements Customer {
 //			log.info("blockQueue.take()...");
 //			dataCol = blockQueue.take();//一直阻塞
 //			log.info("blockQueue.take() done");
-			log.info("to dataCol =blockQueue.poll(200,TimeUnit.MILLISECONDS)...");
+//			log.info("to dataCol =blockQueue.poll(200,TimeUnit.MILLISECONDS)...");
 			dataCol =blockQueue.poll(200,TimeUnit.MILLISECONDS);
-			log.info("done dataCol =blockQueue.poll(200,TimeUnit.MILLISECONDS) ,dataCol="+dataCol);
+//			log.info("done dataCol =blockQueue.poll(200,TimeUnit.MILLISECONDS) ,dataCol="+dataCol);
 		} catch (InterruptedException e) {
 			log.warn("",e);
 		}
@@ -72,9 +72,9 @@ public class Writer implements Customer {
 		}
 		
 		try {
-			log.info("add one to excel...dataCol="+JSON.toJSONString(dataCol));
+//			log.info("add one to excel...dataCol="+JSON.toJSONString(dataCol));
 			excelWriter.addRow(dataCol);
-			log.info("add one to excel completely dataCol="+JSON.toJSONString(dataCol));
+//			log.info("add one to excel completely dataCol="+JSON.toJSONString(dataCol));
 		} catch (IOException e) {
 			log.error("", e);
 		}

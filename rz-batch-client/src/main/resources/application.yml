@@ -17,13 +17,15 @@ my-app:
 #并发量，每个输入文件一个线程池，因此是只针对这个输入文件的并发量限制。
  n-threads: 10
 #输入文件或者文件夹
- input: 机构跑批入参_模板/机构跑批入参_模板_银行卡三四要素.xlsx
+ input: 自动验证小程序入参_模板\自动验证小程序入参_银行卡认证（2000207）.xlsx
 #输出文件的文件名前缀
- output-file-name-prefix: 20190508
+ output-file-name-prefix: 20190625
 #模式："机构跑批"还是"自动验证小程序"
- mode: 机构跑批
+ mode: 自动验证小程序
 #指定发送笔数，大于0有效，小于等于0则只发送excel已有数据的量
- spec-num2-post: 0
+ spec-num2-post: 3
+#指定spec-num2-post笔交易数第一笔和最后一笔的间隔时长，其间的交易时间上均匀分布，spec-num2-post和spec-num2-post-duration大于0有效，单位分钟
+ spec-num2-post-duration: 2 
   
 #####针对机构跑批入参_模板的title到自动验证小程序入参_模板字段名的转换和账户接口号配置
 title-trans: 

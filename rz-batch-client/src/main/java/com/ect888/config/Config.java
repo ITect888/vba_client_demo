@@ -47,5 +47,8 @@ public class Config {
 	 */
 	private long specNum2Post;
 
-
+	/**
+	 * 指定spec-num2-post笔交易数第一笔和最后一笔的间隔时长，其间的交易时间上均匀分布，spec-num2-post和spec-num2-post-duration大于0有效，单位分钟
+	 */
+	private long specNum2PostDuration;
 }
