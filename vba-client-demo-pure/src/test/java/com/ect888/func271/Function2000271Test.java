@@ -1,6 +1,5 @@
-package com.ect888.func268;
+package com.ect888.func271;
 
-import com.alibaba.fastjson.JSON;
 import com.ect888.bus.FunctionCommon;
 import com.ect888.bus.impl.FunctionCommonImpl;
 import com.ect888.config.Config;
@@ -18,21 +17,48 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 行驶证ocr
+ * 高清人像比对服务同步 
+ * 入参身份证正反面（抠图和可选OCR身份号码姓名）
+ * @author fanyj
+ *
  */
-public class Function2000268Test {
+public class Function2000271Test {
 	
-	private static Log log = LogFactory.getLog(Function2000268Test.class);
-	
-	static final String FUNC_NO="2000268";
+	static final String FUNC_NO="2000271";
 	
 	/**
-	 * 行驶证ocr图片路径
+	 * 姓名
+	 * 即使值为空也需要有此字段
+	 */
+	String usernm="";
+	/**
+	 * 证件号码	
+	 * 签名的时候身份证号(即使值为空也需要如此处理)需要利用会话密钥进行AES加密
+	 * post传参数时的身份证号要进行以下处理，
+	 * 步骤为：[a]，用会话密钥加密(AES加密方法);
+	 * [b].URLEncoder.encode（[a]中加密串）;
+	 * [c],base64（[b]中字符串） 
+	 * 
+	 * 即使值为空也需要上述流程
+	 */
+	String certseq="";
+	
+	/**
+	 * 身份证正面照的路径
+	 * 需用Base64编码
+	 * 
+	 * 不支持1MB以上的图片
+     *同时，提取出的小图片，接口限制图片大小为30k，30k-1mb大小的图片将由证通进行压缩。
+	 * 
+	 */
+	String cerfront=Thread.currentThread().getContextClassLoader().getResource("").getPath()+File.separator+"30K高清抠图OCR案例.jpg";
+
+	/**
+	 * 身份证反面照图片路径
 	 * 需用Base64编码
 	 * 不支持1MB以上的图片。
 	 */
-	String ocrPic=Thread.currentThread().getContextClassLoader().getResource("").getPath()+File.separator+"bus.jpg";
-	
+	String certnegative=Thread.currentThread().getContextClassLoader().getResource("").getPath()+File.separator+"certnegative.jpg";
 
 	/**
 	 * 来源渠道，填固定值“0”
@@ -75,22 +101,40 @@ public class Function2000268Test {
 	
 	private FunctionCommonImpl funcCommon=FunctionCommonImpl.getInstance();
 	
+	private static Log log = LogFactory.getLog(Function2000271Test.class);
+	
 	/**
 	 * 
-	 *
+	 * 将入参，按照http post上送和签名规则，放入map内
+	 * 
+	 * 调用2000271接口时的签名过程：
+	 * 上送参数（biztyp,biztypdesc,certseq(即使值为空也需要有此字段),placeid,ptyacct,ptycd,sourcechnl,timestamp,key(会话密钥)），其中key前面的是按照字母排序的，key则是要最后附加上去。
+	 * 其中在签名的时候身份证号需要利用会话密钥进行AES加密。
+	 * 生成的防篡改签名sign在接口调用时和业务参数一起上传。
+	 * 
+	 * 调用2000271比对查询接口：上送参数（biztyp,biztypdesc,certseq,placeid,ptyacct,ptycd,sourcechnl,timestamp, cerfront, usernm,funcNo,sign(签名)）
+	 * ，传上述参数时的身份证号(即使值为空也需要如此处理)要进行以下处理，步骤为：[a]，用会话密钥加密(AES加密方法);[b].URLEncoder.encode（[a]中加密串）;[c],base64（[b]中字符串）  ,身份证正面照需用Base64编码，传上述参数的时候没有顺序要求的。   
+	 * 
 	 * @return 将入参，按照http post上送和签名规则，放入map内
 	 */
 	private Map<String, String> buildParams() {
 		Map<String,String> params=new HashMap<String,String>();
 		
-		params.put(FunctionCommon.TO_PIC_BASE64_HEAD+"ocrPic", ocrPic);
+		params.put(FunctionCommon.TO_PIC_BASE64_HEAD+"cerfront", cerfront);
+
+		params.put(FunctionCommon.TO_PIC_BASE64_HEAD+"certnegative", certnegative);
+		params.put(FunctionCommon.TO_AES_TO_URL_TO_BASE64_HEAD+"certseq", certseq);
+		
 		params.put(FunctionCommon.TO_SIGN_HEAD+"timestamp", timestamp);
 		params.put(FunctionCommon.TO_SIGN_HEAD+"biztypdesc", biztypdesc);
 		params.put(FunctionCommon.TO_SIGN_HEAD+"biztyp", biztyp);
 		params.put(FunctionCommon.TO_SIGN_HEAD+"placeid", placeid);
 		params.put(FunctionCommon.TO_SIGN_HEAD+"sourcechnl", sourcechnl);
+		
 		params.put(FunctionCommon.TO_SIGN_HEAD+"ptyacct",config.getPtyacct());
 		params.put(FunctionCommon.TO_SIGN_HEAD+"ptycd",config.getPtycd());
+		
+		params.put("usernm", usernm);
 		params.put("funcNo", FUNC_NO);
 		
 		return params;
@@ -104,31 +148,11 @@ public class Function2000268Test {
 		Map<String, String> params=buildParams();
 		//加密加签,发起post请求，UrlEncodedFormEntity方式，选择相信服务端ssl证书，忽略证书认证
 		String result = funcCommon.invoke(params);
-		log.info(result);
+			
 		//解析返回数据并处理
-		processResult(result);
 	}
 	
-	/**
-	 * json结果result的解析并处理
-	 * 
-	 * @param result
-	 */
-	private void processResult(String result) {
-		 Json268 json=JSON.parseObject(result, Json268.class);
-		
-		 if("0".equals(json.getError_no())) {//系统级调用成功
-			 if(json.getResults().isEmpty()||null==json.getResults().get(0))//异常，系统级调用成功，却无结果，健壮性考虑，留此分支,联系服务端
-				 throw new IllegalStateException("异常，系统级调用成功，却无结果，健壮性考虑，留此分支,联系服务端");
-			 
-			 Result268 re=json.getResults().get(0);
-			 log.info("订单成功结束");
-			 }else {//异常，未知返回码，健壮性考虑，留此分支,联系服务端
-				 throw new IllegalStateException("异常，未知返回码,联系服务端");
-			 }
-		 }
-		
-	
+
 	@Test
 	public void test() {
 		try {
