@@ -18,10 +18,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 身份证OCR提取
+ * 营业执照ocr
  * 
- * @author linyw
- *
  */
 public class Function2000267Test {
 	
@@ -30,7 +28,7 @@ public class Function2000267Test {
 	static final String FUNC_NO="2000267";
 	
 	/**
-	 * 身份证正面照图片路径
+	 * 营业执照图片路径
 	 * 需用Base64编码
 	 * 不支持1MB以上的图片。
 	 */
@@ -85,17 +83,7 @@ public class Function2000267Test {
 	
 	/**
 	 * 
-	 * 将入参，按照http post上送和签名规则，放入map内
-	 * 
-	 * 
-	 * 调用2000202接口时的签名过程：
-	 * 上送参数（biztyp,biztypdesc,certseq，placeid,ptyacct,ptycd,sourcechnl,timestamp,key(会话密钥)），其中key前面的是按照字母排序的，key则是要最后附加上去。其中在签名的时候身份证号需要利用会话密钥进行AES加密。
-	 * 生成的防篡改签名sign在接口调用时和业务参数一起上传。"
-	 * 
-	 * 调用2000202比对查询接口：上送参数（biztyp,biztypdesc,certseq,placeid,ptyacct,ptycd,sourcechnl,timestamp, videopic, usernm,funcNo,sign(签名)）
-	 * ，传上述参数时的身份证号要进行以下处理，步骤为：[a]，用会话密钥加密(AES加密方法);[b].URLEncoder.encode（[a]中加密串）;[c],base64（[b]中字符串）  ,身份证正面照需用Base64编码，传上述参数的时候没有顺序要求的。                                                                                                                                                                       
-	 * 
-	 * 
+	 *
 	 * @return 将入参，按照http post上送和签名规则，放入map内
 	 */
 	private Map<String, String> buildParams() {
