@@ -1,4 +1,4 @@
-package com.ect888.func272;
+package com.ect888.func273;
 
 import com.ect888.bus.FunctionCommon;
 import com.ect888.bus.impl.FunctionCommonImpl;
@@ -20,11 +20,11 @@ import java.util.Map;
  * 人像打码服务
  *
  */
-public class Function2000272Test {
+public class Function2000273Test {
 	
-	private static Log log = LogFactory.getLog(Function2000272Test.class);
+	private static Log log = LogFactory.getLog(Function2000273Test.class);
 	
-	static final String FUNC_NO="2000272";
+	static final String FUNC_NO="2000273";
 	
 	String facePic=Thread.currentThread().getContextClassLoader().getResource("").getPath()+File.separator+"123.jpg";
 	
