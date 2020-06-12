@@ -1,15 +1,4 @@
-package com.ect888.func267;
-
-import com.alibaba.fastjson.JSON;
-import com.ect888.bus.FunctionCommon;
-import com.ect888.bus.impl.FunctionCommonImpl;
-import com.ect888.config.Config;
-import com.ect888.http.PoolClient;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.log4j.PropertyConfigurator;
-import org.junit.Before;
-import org.junit.Test;
+package com.ect888.func281;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -17,15 +6,26 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.PropertyConfigurator;
+import org.junit.Before;
+import org.junit.Test;
+
+import com.ect888.bus.FunctionCommon;
+import com.ect888.bus.impl.FunctionCommonImpl;
+import com.ect888.config.Config;
+import com.ect888.http.PoolClient;
+
 /**
- * 营业执照ocr
+ * 工商OCR核验
  * 
  */
-public class Function2000267Test {
+public class Function2000281Test {
 	
-	private static Log log = LogFactory.getLog(Function2000267Test.class);
+	private static Log log = LogFactory.getLog(Function2000281Test.class);
 	
-	static final String FUNC_NO="2000267";
+	static final String FUNC_NO="2000281";
 	
 	/**
 	 * 营业执照图片路径
@@ -33,6 +33,12 @@ public class Function2000267Test {
 	 * 不支持1MB以上的图片。
 	 */
 	String ocrPic=Thread.currentThread().getContextClassLoader().getResource("").getPath()+File.separator+"bus.jpg";
+	
+	/**
+	 * 身份证反面照图片路径
+	 * 需用Base64编码
+	 * 不支持1MB以上的图片。
+	 */
 
 	/**
 	 * 来源渠道，填固定值“0”
@@ -104,30 +110,9 @@ public class Function2000267Test {
 		Map<String, String> params=buildParams();
 		//加密加签,发起post请求，UrlEncodedFormEntity方式，选择相信服务端ssl证书，忽略证书认证
 		String result = funcCommon.invoke(params);
+		//打印结果
 		log.info(result);
-		//解析返回数据并处理
-		processResult(result);
 	}
-	
-	/**
-	 * json结果result的解析并处理
-	 * 
-	 * @param result
-	 */
-	private void processResult(String result) {
-		 Json267 json=JSON.parseObject(result, Json267.class);
-		
-		 if("0".equals(json.getError_no())) {//系统级调用成功
-			 if(json.getResults().isEmpty()||null==json.getResults().get(0))//异常，系统级调用成功，却无结果，健壮性考虑，留此分支,联系服务端
-				 throw new IllegalStateException("异常，系统级调用成功，却无结果，健壮性考虑，留此分支,联系服务端");
-			 
-			 Result267 re=json.getResults().get(0);
-			 log.info("订单成功结束");
-			 }else {//异常，未知返回码，健壮性考虑，留此分支,联系服务端
-				 throw new IllegalStateException("异常，未知返回码,联系服务端");
-			 }
-		 }
-		
 	
 	@Test
 	public void test() {
