@@ -1,0 +1,19 @@
+package com.ect888.func377;
+
+import com.ect888.bean.JsonCommon;
+
+import java.util.ArrayList;
+
+public class Json377 extends JsonCommon{
+
+	private ArrayList<Result377> results;
+
+	public ArrayList<Result377> getResults() {
+		return results;
+	}
+
+	public void setResults(ArrayList<Result377> results) {
+		this.results = results;
+	}
+
+}
