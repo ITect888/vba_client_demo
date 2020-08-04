@@ -36,7 +36,7 @@ public class Function2000282Test {
 	 * 
 	 * 必填
 	 */
-	String acctno="6222024301077815239";
+	String acctno="11111111111";
 	/**
 	 * 证件号码	
 	 * 签名的时候身份证号要利用会话密钥进行AES加密
@@ -47,17 +47,17 @@ public class Function2000282Test {
 	 * 
 	 * 必填
 	 */
-	String certseq="341227198912173710";
+	String certseq="11111111111111";
 	/**
 	 * 姓名
 	 * 必填
 	 */
-	String usernm="账户类型验证通过";
+	String usernm="金预期";
 	/**
 	 * 手机号
 	 * 必填
 	 */
-	String phoneno="15298386506";
+	String phoneno="111111111";
 	
 	/**
 	 * 来源渠道，填固定值“0”
