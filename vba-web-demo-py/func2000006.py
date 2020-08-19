@@ -34,5 +34,5 @@ if __name__ == "__main__":
         "reqdata": data
     }
     requests.packages.urllib3.disable_warnings()
-    r = requests.post(url, params=param, headers=headers, verify=False)
+    r = requests.post(url, data=param, headers=headers, verify=False)
     print(r.json())
