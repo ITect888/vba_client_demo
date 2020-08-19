@@ -84,5 +84,5 @@ if __name__ == "__main__":
     }
     print(data)
     requests.packages.urllib3.disable_warnings()
-    r = requests.post(url, params=data, headers=headers, verify=False)
+    r = requests.post(url, data=data, headers=headers, verify=False)
     print(r.json())
