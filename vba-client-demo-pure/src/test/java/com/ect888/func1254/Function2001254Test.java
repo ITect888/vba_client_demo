@@ -1,4 +1,4 @@
-package com.ect888.func254;
+package com.ect888.func1254;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -24,11 +24,11 @@ import com.ect888.http.PoolClient;
  * @author fanyj
  *
  */
-public class Function2000254Test {
+public class Function2001254Test {
 	
-	private static Log log = LogFactory.getLog(Function2000254Test.class);
+	private static Log log = LogFactory.getLog(Function2001254Test.class);
 	
-	static final String FUNC_NO="2000254";
+	static final String FUNC_NO="2001254";
 	
 	/**
 	 * 姓名
@@ -150,17 +150,17 @@ public class Function2000254Test {
 	 * @param result
 	 */
 	private void processResult(String result) {
-		 Json254 json=JSON.parseObject(result,Json254.class);
+		 Json1254 json=JSON.parseObject(result,Json1254.class);
 		
 		 if("0".equals(json.getError_no())) {//系统级调用成功
 			 if(json.getResults().isEmpty()||null==json.getResults().get(0))//异常，系统级调用成功，却无结果，健壮性考虑，留此分支,联系服务端
 				 throw new IllegalStateException("异常，系统级调用成功，却无结果，健壮性考虑，留此分支,联系服务端");
 			 
-			 Result254 re=json.getResults().get(0);
+			 Result1254 re=json.getResults().get(0);
 			 log.info("订单成功结束");
 			 log.info("业务应答码respcd="+re.getRespcd());
 			 log.info("业务应答信息respinfo="+re.getRespinfo());
-			 if("1000".equals(re.getRespcd())||"1001".equals(re.getRespcd())) {
+			 if("0000".equals(re.getRespcd())||"0001".equals(re.getRespcd())) {
 				 log.info("比对分值mpssim="+re.getMpssim());
 			 }
 		 }else{//系统级调用失败，异常，查看入参或者联系服务端

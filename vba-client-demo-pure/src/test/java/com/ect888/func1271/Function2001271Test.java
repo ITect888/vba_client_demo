@@ -1,4 +1,4 @@
-package com.ect888.func271;
+package com.ect888.func1271;
 
 import com.ect888.bus.FunctionCommon;
 import com.ect888.bus.impl.FunctionCommonImpl;
@@ -22,9 +22,9 @@ import java.util.Map;
  * @author fanyj
  *
  */
-public class Function2000271Test {
+public class Function2001271Test {
 	
-	static final String FUNC_NO="2000271";
+	static final String FUNC_NO="2001271";
 	
 	/**
 	 * 姓名
@@ -101,7 +101,7 @@ public class Function2000271Test {
 	
 	private FunctionCommonImpl funcCommon=FunctionCommonImpl.getInstance();
 	
-	private static Log log = LogFactory.getLog(Function2000271Test.class);
+	private static Log log = LogFactory.getLog(Function2001271Test.class);
 	
 	/**
 	 * 

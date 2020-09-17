@@ -1,4 +1,4 @@
-package com.ect888.func258;
+package com.ect888.func1258;
 
 /**
  * 
@@ -16,14 +16,14 @@ package com.ect888.func258;
 			"name": "系统判断为同一人",
 			"cerkey": "",
 			"ptyAcct": "12500000",
-			"respcd": "1000",
+			"respcd": "0000",
 			"status": "00"
 		}
  * 
  * @author fanyj
  *
  */
-public class Result258 {
+public class Result1258 {
 	
 	/**
 	 * 订单流水号
