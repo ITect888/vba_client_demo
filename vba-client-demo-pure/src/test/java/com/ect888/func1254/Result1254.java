@@ -1,29 +1,29 @@
-package com.ect888.func258;
+package com.ect888.func1254;
 
 /**
  * 
  * {
-			"localsim": "",
-			"biztyp": "A001",
-			"certseq": "341227198912173710",
-			"accountName": "",
-			"mpssim": "88.0",
-			"telephone": "",
-			"respinfo": "认证一致(通过)",
-			"sysSeqNb": "19103520181012221215290001",
-			"ptycd": "12500000",
-			"facePicMPS": "",
-			"name": "系统判断为同一人",
-			"cerkey": "",
-			"ptyAcct": "12500000",
-			"respcd": "1000",
-			"status": "00"
-		}
+            "cerkey":"",
+            "respinfo":"认证一致(通过)",
+            "status":"00",
+            "mpssim":"88.0",
+            "facePicMPS":"",
+            "sysSeqNb":"19103520190308801723330001",
+            "biztyp":"A001",
+            "respcd":"0000",
+            "certseq":"341227198912173710",
+            "accountName":"",
+            "name":"姓名",
+            "ptyAcct":"ect888_public_demo",
+            "ptycd":"ect888_public",
+            "localsim":"",
+            "telephone":""
+        }
  * 
  * @author fanyj
  *
  */
-public class Result258 {
+public class Result1254 {
 	
 	/**
 	 * 订单流水号
@@ -176,8 +176,4 @@ public class Result258 {
 	public void setLocalsim(String localsim) {
 		this.localsim = localsim;
 	}
-	
-	
-	
-	
 }

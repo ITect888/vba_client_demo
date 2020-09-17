@@ -1,4 +1,4 @@
-package com.ect888.func258;
+package com.ect888.func1254;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,7 @@ import com.ect888.bean.JsonCommon;
 
 /**
  * 
- * 102查询结果
+ * 254查询结果
  * 对应json
  * {
 	"error_info": "",
@@ -25,28 +25,28 @@ import com.ect888.bean.JsonCommon;
 			"name": "系统判断为同一人",
 			"cerkey": "",
 			"ptyAcct": "12500000",
-			"respcd": "1000",
+			"respcd": "0000",
 			"status": "00"
 		}
 	],
 	"error_no": "0"
 }
-或
-{"error_info":"网络不可用，请稍后再试","error_no":"-1006"}
  * 
  * @author fanyj
  *
  */
-public class Json258 extends JsonCommon{
+public class Json1254 extends JsonCommon{
 
-	private ArrayList<Result258> results;
+	private ArrayList<Result1254> results;
 
-	public ArrayList<Result258> getResults() {
+	public ArrayList<Result1254> getResults() {
 		return results;
 	}
 
-	public void setResults(ArrayList<Result258> results) {
+	public void setResults(ArrayList<Result1254> results) {
 		this.results = results;
 	}
 	
+	
+
 }

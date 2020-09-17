@@ -1,4 +1,4 @@
-package com.ect888.func258;
+package com.ect888.func1258;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -24,9 +24,9 @@ import com.ect888.http.PoolClient;
  * @author fanyj
  *
  */
-public class Function2000258Test {
+public class Function2001258Test {
 	
-	static final String FUNC_NO="2000258";
+	static final String FUNC_NO="2001258";
 	
 	/**
 	 * 姓名
@@ -96,7 +96,7 @@ public class Function2000258Test {
 	
 	private FunctionCommonImpl funcCommon=FunctionCommonImpl.getInstance();
 	
-	private static Log log = LogFactory.getLog(Function2000258Test.class);
+	private static Log log = LogFactory.getLog(Function2001258Test.class);
 	
 	/**
 	 * 
@@ -153,16 +153,16 @@ public class Function2000258Test {
 	 * @param result
 	 */
 	private void processResult(String result) {
-		 Json258 json=JSON.parseObject(result,Json258.class);
+		 Json1258 json=JSON.parseObject(result,Json1258.class);
 		
 		 if("0".equals(json.getError_no())) {//系统级调用成功
 			 if(json.getResults().isEmpty()||null==json.getResults().get(0))//异常，系统级调用成功，却无结果，健壮性考虑，留此分支,联系服务端
 				 throw new IllegalStateException("异常，系统级调用成功，却无结果，健壮性考虑，留此分支,联系服务端");
 			 
-			 Result258 re=json.getResults().get(0);
+			 Result1258 re=json.getResults().get(0);
 			 log.info("业务应答码respcd="+re.getRespcd());
 			 log.info("业务应答信息respinfo="+re.getRespinfo());
-			 if("1000".equals(re.getRespcd())||"1001".equals(re.getRespcd())) {
+			 if("0000".equals(re.getRespcd())||"0001".equals(re.getRespcd())) {
 				 log.info("比对分值mpssim="+re.getMpssim());
 			 }
 		 }else{//系统级调用失败，异常，查看入参或者联系服务端
