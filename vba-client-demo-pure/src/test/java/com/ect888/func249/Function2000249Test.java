@@ -11,7 +11,6 @@ import org.apache.log4j.PropertyConfigurator;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.alibaba.fastjson.JSON;
 import com.ect888.bus.FunctionCommon;
 import com.ect888.bus.impl.FunctionCommonImpl;
 import com.ect888.config.Config;
@@ -29,15 +28,8 @@ public class Function2000249Test {
 	
 static final String FUNC_NO="2000249";
 	
-	/**
-	 * 车牌省份
-	 * 
-	 * 不参与签名
-	 * 
-	 * 以url编码再base64编码形式post发送
-	 * 
-	 */
-	String province = "苏";
+
+	String usernm = "xxx";
 
 	/**
 	 * 车牌号(无省份开头)
@@ -144,7 +136,7 @@ static final String FUNC_NO="2000249";
 	 * 签名过程：上送参数（sourcechnl,biztyp，biztypdesc，platetype，platenumber，placeid，ptyacct，ptycd，timestamp，key(会话密钥)），其中key前面的是按照字母排序的，key则是要最后附加上去。
 	 * 其中在签名的时候车牌号platenumber需要用会话密钥进行AES加密。签名过程生成签名密钥sign  
 	 * 
-	 * 上送参数（sourcechnl,biztyp，biztypdesc，platetype，platenumber，province, placeid，ptyacct，ptycd，timestamp，funcNo，sign(会话密钥)）
+	 * 上送参数（sourcechnl,biztyp，biztypdesc，platetype，platenumber， placeid，ptyacct，ptycd，timestamp，funcNo，usernm,sign(会话密钥)）
 	 * ，传上述参数时的车牌号platenumber要进行以下处理，步骤为：[a]，用会话密钥加密(AES加密方法);[b].URLEncoder.encode（[a]中加密串）;[c],base64（[b]中字符串） 
 	 *  , 省份province要进行[b][c]两步处理，传上述参数的时候没有顺序要求的 
 	 * 
@@ -165,7 +157,7 @@ static final String FUNC_NO="2000249";
 		params.put(FunctionCommon.TO_SIGN_HEAD+"ptyacct",config.getPtyacct());
 		params.put(FunctionCommon.TO_SIGN_HEAD+"ptycd",config.getPtycd());
 		
-		params.put(FunctionCommon.TO_URL_TO_BASE64_HEAD+"province", province);
+		params.put("usernm", usernm);
 		
 		params.put("funcNo", FUNC_NO);
 		
@@ -178,29 +170,7 @@ static final String FUNC_NO="2000249";
 	 * @param result
 	 */
 	private void processResult(String result) {
-		 Json249 json=JSON.parseObject(result,Json249.class);
-			
-		 if("0".equals(json.getError_no())) {//系统级调用成功
-			 if(json.getResults().isEmpty()||null==json.getResults().get(0))//异常，系统级调用成功，却无结果，健壮性考虑，留此分支,联系服务端
-				 throw new IllegalStateException("异常，系统级调用成功，却无结果，健壮性考虑，留此分支,联系服务端");
-			 
-			 Result249 re=json.getResults().get(0);
-				 log.info("订单成功结束");
-				 log.info("业务应答码respcd="+re.getRespcd());
-				 log.info("业务应答信息respinfo="+re.getRespinfo());
-				 
-				 if("49000".equals(re.getRespcd())) {
-					 //业务应答
-					 log.info("车辆状态"+re.getCarStatus());
-					 log.info("Vin 年份"+re.getVIN_year());
-					 log.info("ROZ"+re.getROZ());
-					 log.info("VIN"+re.getVIN());
-					 log.info("...");
-					 log.info(JSON.toJSONString(re));
-				 }
-		 }else{//系统级调用失败，异常，查看入参或者联系服务端
-			 throw new IllegalStateException("系统级调用失败，异常，查看入参或者联系服务端");
-		 }
+		log.info(result);
 		
 	}
 	
