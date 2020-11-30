@@ -44,7 +44,7 @@ public class Function2001209Test {
 	 * 
 	 * 必填
 	 */
-	String certseq="341227198912173710";
+	String certseq="341227***********0";
 	
 	/**
 	 * 来源渠道，填固定值“0”
@@ -108,11 +108,11 @@ public class Function2001209Test {
 	 * 将入参，按照http post上送和签名规则，放入map内
 	 * 
 	 * 
-	 * 调用2000209接口时的签名过程：
-	 * 上送参数（biztyp,biztypdesc,certseq，placeid,ptyacct,ptycd,sourcechnl,timestamp,key(会话密钥)），其中key前面的是按照字母排序的，key则是要最后附加上去。其中在签名的时候身份证号需要利用会话密钥进行AES加密。
+	 * 调用2001209接口时的签名过程：
+	 * 上送参数（biztyp,biztypdesc,certseq，placeid,ptyacct,ptycd,sourcechnl,idtype,nation,timestamp,key(会话密钥)），其中key前面的是按照字母排序的，key则是要最后附加上去。其中在签名的时候身份证号需要利用会话密钥进行AES加密。
 	 * 生成的防篡改签名sign在接口调用时和业务参数一起上传。"
 	 * 
-	 * 调用2000209实名认证接口：上送参数（biztyp,biztypdesc,certseq,placeid,ptyacct,ptycd,sourcechnl,timestamp, videopic, usernm,funcNo,sign(签名)）
+	 * 调用2001209接口：上送参数（biztyp,biztypdesc,certseq,placeid,ptyacct,ptycd,sourcechnl,idtype,nation,timestamp, videopic, usernm,funcNo,sign(签名)）
 	 * ，传上述参数时的身份证号要进行以下处理，步骤为：[a]，用会话密钥加密(AES加密方法);[b].URLEncoder.encode（[a]中加密串）;[c],base64（[b]中字符串）  ,身份证正面照需用Base64编码，传上述参数的时候没有顺序要求的。                                                                                                                                                                       
 	 * 
 	 * 
