@@ -7,26 +7,29 @@ import com.ect888.http.PoolClient;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.PropertyConfigurator;
+import org.bouncycastle.util.encoders.Base64;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 图片静默活体检测
+ * 视频静默活体检测
  *
  */
-public class Function2000273Test {
+public class Function2001273Test {
 	
-	private static Log log = LogFactory.getLog(Function2000273Test.class);
+	private static Log log = LogFactory.getLog(Function2001273Test.class);
 	
-	static final String FUNC_NO="2000273";
+	static final String FUNC_NO="2001273";
 	
-	String facePic=Thread.currentThread().getContextClassLoader().getResource("").getPath()+File.separator+"123.jpg";
+	String facePic="D:\\img\\test.mp4";
 	
 
 	/**
@@ -77,8 +80,17 @@ public class Function2000273Test {
 	 */
 	private Map<String, String> buildParams() {
 		Map<String,String> params=new HashMap<String,String>();
-		
-		params.put(FunctionCommon.TO_PIC_BASE64_HEAD+"facePic", facePic);
+		try {
+			InputStream in = new FileInputStream(new File(facePic));
+			byte[] bytes = new byte[in.available()];
+			in.read(bytes);
+			String baseFacePic=Base64.toBase64String(bytes);
+			System.out.println("baseFacePic:"+baseFacePic);
+			params.put("facePic",baseFacePic );
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		params.put(FunctionCommon.TO_SIGN_HEAD+"timestamp", timestamp);
 		params.put(FunctionCommon.TO_SIGN_HEAD+"biztypdesc", biztypdesc);
 		params.put(FunctionCommon.TO_SIGN_HEAD+"biztyp", biztyp);
@@ -86,6 +98,7 @@ public class Function2000273Test {
 		params.put(FunctionCommon.TO_SIGN_HEAD+"sourcechnl", sourcechnl);
 		params.put(FunctionCommon.TO_SIGN_HEAD+"ptyacct",config.getPtyacct());
 		params.put(FunctionCommon.TO_SIGN_HEAD+"ptycd",config.getPtycd());
+		params.put(FunctionCommon.TO_SIGN_HEAD+"type","mp4");
 		params.put("funcNo", FUNC_NO);
 		
 		return params;

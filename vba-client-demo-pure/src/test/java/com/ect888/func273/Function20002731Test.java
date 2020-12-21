@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 唇语
+ * 唇语活体检测
  *
  */
 public class Function20002731Test {
