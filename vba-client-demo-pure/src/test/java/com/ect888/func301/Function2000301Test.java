@@ -60,6 +60,9 @@ public class Function2000301Test {
 	String biztypdesc="A001Desc";
 
 	String certSeq = "341227198912173710";
+
+	String name="姓名";
+
 	
 	private Config config=Config.getInstance();
 	
@@ -80,6 +83,9 @@ public class Function2000301Test {
 		Map<String,String> params=new HashMap<String,String>();
 		
 		params.put(FunctionCommon.TO_AES_TO_URL_TO_BASE64_HEAD+"certno", certSeq);
+
+		params.put("name", name);
+
 		params.put(FunctionCommon.TO_SIGN_HEAD+"biztypdesc", biztypdesc);
 		params.put(FunctionCommon.TO_SIGN_HEAD+"biztyp", biztyp);
 		params.put(FunctionCommon.TO_SIGN_HEAD+"placeid", placeid);
