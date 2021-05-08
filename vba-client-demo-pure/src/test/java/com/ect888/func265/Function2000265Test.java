@@ -16,8 +16,7 @@ import com.ect888.config.Config;
 import com.ect888.http.PoolClient;
 
 /**
- * 银行卡账户类型验证五要素认证接口
- * 
+ *
  * 示例代码
  * 
  * @author fanyj
@@ -52,28 +51,7 @@ public class Function2000265Test {
 	 * 必填
 	 */
 	String acctno="6222024301077815239";
-	/**
-	 * 证件号码	
-	 * 签名的时候身份证号要利用会话密钥进行AES加密
-	 * post传参数时的身份证号要进行以下处理：
-	 * 步骤为：[a]，用会话密钥加密(AES加密方法);
-	 * [b].URLEncoder.encode[a]中加密串;
-	 * [c],base64[b]中字符串
-	 * 
-	 * 必填
-	 */
-	String certseq="341227198912173710";
-	/**
-	 * 姓名
-	 * 必填
-	 */
-	String usernm="账户类型验证通过";
-	/**
-	 * 手机号
-	 * 必填
-	 */
-	String phoneno="15298386506";
-	
+
 	/**
 	 * 来源渠道，填固定值“0”
 	 * 
@@ -121,12 +99,10 @@ public class Function2000265Test {
 	private Map<String, String> buildParams() {
 		Map<String,String> params=new HashMap<String,String>();
 		
-		params.put(FunctionCommon.TO_AES_TO_URL_TO_BASE64_HEAD+"certseq", certseq);
 		params.put(FunctionCommon.TO_AES_TO_URL_TO_BASE64_HEAD+"acctno", acctno);
 		
 		params.put(FunctionCommon.TO_SIGN_HEAD+"accountType", accountType);
 		
-		params.put(FunctionCommon.TO_SIGN_HEAD+"phoneno", phoneno);
 		params.put(FunctionCommon.TO_SIGN_HEAD+"biztypdesc", biztypdesc);
 		params.put(FunctionCommon.TO_SIGN_HEAD+"biztyp", biztyp);
 		params.put(FunctionCommon.TO_SIGN_HEAD+"placeid", placeid);
@@ -135,7 +111,6 @@ public class Function2000265Test {
 		params.put(FunctionCommon.TO_SIGN_HEAD+"ptyacct",config.getPtyacct());
 		params.put(FunctionCommon.TO_SIGN_HEAD+"ptycd",config.getPtycd());
 		
-		params.put("usernm", usernm);
 		params.put("funcNo", FUNC_NO);
 		
 		return params;
