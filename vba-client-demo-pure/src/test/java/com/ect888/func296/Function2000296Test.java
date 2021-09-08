@@ -74,6 +74,11 @@ public class Function2000296Test {
      */
     String realUser = "真实用户";
     /**
+     * 应用场景
+     * 必填
+     */
+    String scene = "01";
+    /**
      * 时间戳
      * <p>
      * 参与签名
@@ -102,7 +107,7 @@ public class Function2000296Test {
         params.put("version", version);
         params.put("realUser", realUser);
         params.put("funcNo", FUNC_NO);
-
+        params.put("scene", scene);
         return params;
     }
 

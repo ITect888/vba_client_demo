@@ -127,7 +127,7 @@ public class Function2000239Test {
 
 		params.put("verson","V2.0"); //版本 默认填写V2.0
 		params.put("realUser","证股股份有限公司"); //上送的真实客户
-		params.put("sence","01");   //场景编号，参见接口文档
+		params.put("scene","01");   //场景编号，参见接口文档
 
 		params.put("usernm", usernm);
 		params.put("funcNo", FUNC_NO);
