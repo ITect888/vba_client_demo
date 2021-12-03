@@ -107,28 +107,10 @@ public class Function2000377Test {
 		String result = funcCommon.invoke(params);
 		log.info("result=>"+result);
 		//解析返回数据并处理
-		processResult(result);
+
 	}
 	
-	/**
-	 * json结果result的解析并处理
-	 * 
-	 * @param result
-	 */
-	private void processResult(String result) {
-		 Json377 json=JSON.parseObject(result, Json377.class);
-		
-		 if("0".equals(json.getError_no())) {//系统级调用成功
-			 if(json.getResults().isEmpty()||null==json.getResults().get(0))//异常，系统级调用成功，却无结果，健壮性考虑，留此分支,联系服务端
-				 throw new IllegalStateException("异常，系统级调用成功，却无结果，健壮性考虑，留此分支,联系服务端");
-			 
-			 Result377 re=json.getResults().get(0);
-			 log.info("订单成功结束");
-			 }else {//异常，未知返回码，健壮性考虑，留此分支,联系服务端
-				 throw new IllegalStateException("异常，未知返回码,联系服务端");
-			 }
-		 }
-		
+
 	
 	@Test
 	public void test() throws Exception{
