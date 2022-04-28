@@ -125,7 +125,7 @@ public class Function2000239Test {
 		params.put(FunctionCommon.TO_SIGN_HEAD+"ptyacct",config.getPtyacct());
 		params.put(FunctionCommon.TO_SIGN_HEAD+"ptycd",config.getPtycd());
 
-		params.put("verson","V2.0"); //版本 默认填写V2.0
+		params.put("version","V2.0"); //版本 默认填写V2.0
 		params.put("realUser","证股股份有限公司"); //上送的真实客户
 		params.put("scene","01");   //场景编号，参见接口文档
 
