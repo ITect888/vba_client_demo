@@ -1,4 +1,4 @@
-package com.ect888.func296;
+package com.ect888.func313;
 
 import com.ect888.bus.FunctionCommon;
 import com.ect888.bus.impl.FunctionCommonImpl;
@@ -16,30 +16,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 移动三要素MD5认证
+ * 携号转网
  */
-public class Function2000296Test {
+public class Function2000313Test {
 
-    private static Log log = LogFactory.getLog(Function2000296Test.class);
+    private static Log log = LogFactory.getLog(Function2000313Test.class);
 
-    static final String FUNC_NO = "2000296";
-
-    /**
-     * 身份证号
-     */
-    String idCard = "233424423422341252";
+    static final String FUNC_NO = "2000313";
 
     /**
-     * 姓名
+     * 手机号
+     * 必填
      */
-    String userName = "张三";
-
-    /**
-     * 手机
-     */
-    String mobile = "131xxxxxxxx";
-
-
+    String phone = "12345678901";
     /**
      * 来源渠道，填固定值“0”
      * 参与签名
@@ -63,21 +52,7 @@ public class Function2000296Test {
      * 参与签名
      */
     String biztypdesc = "对比服务";
-    /**
-     * 版本
-     * 必填
-     */
-    String version = "2.0";
-    /**
-     * 真实用户
-     * 必填
-     */
-    String realUser = "真实用户";
-    /**
-     * 应用场景
-     * 必填
-     */
-    String scene = "01";
+
     /**
      * 时间戳
      * <p>
@@ -94,8 +69,7 @@ public class Function2000296Test {
     private Map<String, String> buildParams() {
 
         Map<String, String> params = new HashMap();
-        params.put(FunctionCommon.TO_SIGN_HEAD + "idCardMD5", MD5Utils.md5(idCard));
-        params.put(FunctionCommon.TO_SIGN_HEAD + "mobileMD5", MD5Utils.md5(mobile));
+        params.put(FunctionCommon.TO_AES_TO_URL_TO_BASE64_HEAD + "phone", phone);
         params.put(FunctionCommon.TO_SIGN_HEAD + "timestamp", timestamp);
         params.put(FunctionCommon.TO_SIGN_HEAD + "biztypdesc", biztypdesc);
         params.put(FunctionCommon.TO_SIGN_HEAD + "biztyp", biztyp);
@@ -103,11 +77,8 @@ public class Function2000296Test {
         params.put(FunctionCommon.TO_SIGN_HEAD + "sourcechnl", sourcechnl);
         params.put(FunctionCommon.TO_SIGN_HEAD + "ptyacct", config.getPtyacct());
         params.put(FunctionCommon.TO_SIGN_HEAD + "ptycd", config.getPtycd());
-        params.put("userNameMD5", MD5Utils.md5(userName));
-        params.put("version", version);
-        params.put("realUser", realUser);
         params.put("funcNo", FUNC_NO);
-        params.put("scene", scene);
+
         return params;
     }
 

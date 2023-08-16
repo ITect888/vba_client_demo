@@ -1,32 +1,43 @@
-package com.ect888.func377;
+package com.ect888.func335;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
+import com.ect888.bus.FunctionCommon;
+import com.ect888.bus.impl.FunctionCommonImpl;
+import com.ect888.config.Config;
+import com.ect888.http.PoolClient;
+import com.ect888.util.MD5Utils;
+import org.apache.commons.codec.digest.Md5Crypt;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.PropertyConfigurator;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.alibaba.fastjson.JSON;
-import com.ect888.bus.FunctionCommon;
-import com.ect888.bus.impl.FunctionCommonImpl;
-import com.ect888.config.Config;
-import com.ect888.http.PoolClient;
+import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * 出入境身份认证
+ * 实名认证服务-同步 
  * 
+ * @author fanyj
+ *
  */
-public class Function2000377Test {
+public class Function2000335Test {
 	
-	private static Log log = LogFactory.getLog(Function2000377Test.class);
+	private static Log log = LogFactory.getLog(Function2000335Test.class);
 	
-	static final String FUNC_NO="2000377";
+	static final String FUNC_NO="2000335";
 	
+
+	/**
+
+	 * 必填
+	 */
+	String certseq= MD5Utils.md5("341227198912173710");
+
+	String encry="2"; //2 md5 3 sha256
 
 	/**
 	 * 来源渠道，填固定值“0”
@@ -42,7 +53,7 @@ public class Function2000377Test {
 	 */
 	String placeid="00";
 	/**
-	 * 业务类型
+	 * 服务类型
 	 * 符合入参长度即可，不做技术限制
 	 * 
 	 * 参与签名
@@ -68,29 +79,31 @@ public class Function2000377Test {
 	private PoolClient client=PoolClient.getInstance();
 	
 	private FunctionCommonImpl funcCommon=FunctionCommonImpl.getInstance();
-	
+
+	public Function2000335Test() throws UnsupportedEncodingException {
+	}
+
 	/**
 	 * 
+	 * 将入参，按照http post上送和签名规则，放入map内
 	 *
+	 * 
 	 * @return 将入参，按照http post上送和签名规则，放入map内
 	 */
-	private Map<String, String> buildParams()  throws Exception{
+	private Map<String, String> buildParams() {
 		Map<String,String> params=new HashMap<String,String>();
-
+		
+		params.put(FunctionCommon.TO_SIGN_HEAD+"certseq", certseq);
+		
 		params.put(FunctionCommon.TO_SIGN_HEAD+"timestamp", timestamp);
 		params.put(FunctionCommon.TO_SIGN_HEAD+"biztypdesc", biztypdesc);
 		params.put(FunctionCommon.TO_SIGN_HEAD+"biztyp", biztyp);
 		params.put(FunctionCommon.TO_SIGN_HEAD+"placeid", placeid);
 		params.put(FunctionCommon.TO_SIGN_HEAD+"sourcechnl", sourcechnl);
+		
 		params.put(FunctionCommon.TO_SIGN_HEAD+"ptyacct",config.getPtyacct());
-		params.put(FunctionCommon.TO_SIGN_HEAD+"ptycd",config.getPtycd());	
-		
-		
-		params.put(FunctionCommon.TO_SIGN_HEAD+"idType","553");
-		params.put(FunctionCommon.TO_SIGN_HEAD+"nation","FRA");
-		params.put(FunctionCommon.TO_AES_TO_URL_TO_BASE64_HEAD+"idNumber", "FRA120080010202");
-		params.put(FunctionCommon.TO_SIGN_HEAD+"name","ZHANGSANSAN");
-		
+		params.put(FunctionCommon.TO_SIGN_HEAD+"ptycd",config.getPtycd());
+		params.put(FunctionCommon.TO_SIGN_HEAD+"encry",encry);
 
 		params.put("funcNo", FUNC_NO);
 		
@@ -100,20 +113,21 @@ public class Function2000377Test {
 	/**
 	 * 模拟调用
 	 */
-	public void doWork()  throws Exception{
+	public void doWork(){
 			
 		Map<String, String> params=buildParams();
 		//加密加签,发起post请求，UrlEncodedFormEntity方式，选择相信服务端ssl证书，忽略证书认证
 		String result = funcCommon.invoke(params);
-		log.info("result=>"+result);
+			
 		//解析返回数据并处理
-
+		System.out.println(result);
 	}
 	
 
+
 	
 	@Test
-	public void test() throws Exception{
+	public void test() {
 		try {
 			doWork();
 		}catch(RuntimeException e){
