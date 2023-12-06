@@ -36,10 +36,10 @@ public class Function2000002Test {
 	
 	public void doWork() throws Exception {
 		
-		//组装参数，会话密钥为随便大于16位小于64位的字符串（生成规则机构自定义，超过16位的字母数字组合）。注：发起交易只需要会话密钥。会话密钥设置后不更改则长久有效;
+		//组装参数，会话密钥为随便大于16位小于24位的字符串。注：发起交易只需要会话密钥。会话密钥设置后不更改则长久有效;
 		String data = "ptyacct="+config.getPtyacct()
-		+"&ptycd="+config.getPtycd()+"&ptypwd="+config.getNewPtyPwd()
-		+"&encrykey="+config.getPtyKey();
+		+"&ptycd="+config.getPtycd()+"&ptypwd="+config.getNewPtyPwd() //2000006接口同步给系统的当前密码
+		+"&encrykey="+config.getPtyKey();  //该接口同步给系统的会话密钥
 
 		//公钥加密且做对应的base64，URLEncoder处理
 		data = KeyHelp.getStrByPublic(config.getPublicKey(), data);
