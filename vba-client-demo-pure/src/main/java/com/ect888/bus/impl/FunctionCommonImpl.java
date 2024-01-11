@@ -193,4 +193,9 @@ public class FunctionCommonImpl  implements FunctionCommon{
 		
 		return result;
 	}
+
+	@Override
+	public String invoke(Map<String, String> params, Map<String, String> header) {
+		return invoke(params);
+	}
 }
