@@ -1,4 +1,17 @@
-package com.ect888.func377;
+package com.ect888.func379;
+
+import com.alibaba.fastjson.JSON;
+import com.ect888.bus.FunctionCommon;
+import com.ect888.bus.impl.FunctionCommonImpl;
+import com.ect888.config.Config;
+import com.ect888.func381.Json381;
+import com.ect888.func381.Result381;
+import com.ect888.http.PoolClient;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.PropertyConfigurator;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -6,29 +19,16 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.log4j.PropertyConfigurator;
-import org.junit.Before;
-import org.junit.Test;
-
-import com.alibaba.fastjson.JSON;
-import com.ect888.bus.FunctionCommon;
-import com.ect888.bus.impl.FunctionCommonImpl;
-import com.ect888.config.Config;
-import com.ect888.http.PoolClient;
-
 /**
  * 出入境身份认证
  * 
  */
-public class Function2000377Test {
+public class Function2000379Test {
 	
-	private static Log log = LogFactory.getLog(Function2000377Test.class);
+	private static Log log = LogFactory.getLog(Function2000379Test.class);
 	
-	static final String FUNC_NO="2000377";
+	static final String FUNC_NO="2000379";
 	
-
 	/**
 	 * 来源渠道，填固定值“0”
 	 * 
@@ -57,25 +57,49 @@ public class Function2000377Test {
 	 * 参与签名
 	 */
 	String biztypdesc="对比服务";
+	
+	/**
+	 * 证件类型编号
+	 * 
+	 * 414：定居国外的中国公民护照，普通护照	516：港澳居民来往内地通行证		553：外国人永久居留身份证
+	 * 参与签名
+	 */
+	String idType = "";
+	
+	/**
+	 * 证件号码	
+	 * 签名的时候身份证号(即使值为空也需要如此处理)需要利用会话密钥进行AES加密
+	 * post传参数时的身份证号要进行以下处理，
+	 * 步骤为：[a]，用会话密钥加密(AES加密方法);
+	 * [b].URLEncoder.encode（[a]中加密串）;
+	 * [c],base64（[b]中字符串） 
+	 * 
+	 */
+	String idNumber="";
+	
+	/**
+	 * 国籍代码
+	 * 参与签名
+	 */
+	String nation = "";
+	
+	/**
+	 *
+	 * 参与签名
+	 */
+	String name = "";
+	String sex = "";
+
+	String birthDate = "";
+	String expiryDate = "";
+
+
 	/**
 	 * 时间戳
 	 * 
 	 * 参与签名
 	 */
 	String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-
-	String idType = "";
-
-
-	String nation = "";
-
-	String idNumber = "";
-
-
-
-	String name = "";
-
-
 	
 	private Config config=Config.getInstance();
 	
@@ -99,12 +123,14 @@ public class Function2000377Test {
 		params.put(FunctionCommon.TO_SIGN_HEAD+"ptyacct",config.getPtyacct());
 		params.put(FunctionCommon.TO_SIGN_HEAD+"ptycd",config.getPtycd());	
 		
-		
 		params.put(FunctionCommon.TO_SIGN_HEAD+"idType",idType);
 		params.put(FunctionCommon.TO_SIGN_HEAD+"nation",nation);
 		params.put(FunctionCommon.TO_AES_TO_URL_TO_BASE64_HEAD+"idNumber", idNumber);
 		params.put(FunctionCommon.TO_SIGN_HEAD+"name",name);
-		
+		params.put(FunctionCommon.TO_SIGN_HEAD+"sex",sex);
+		params.put(FunctionCommon.TO_SIGN_HEAD+"birthDate",birthDate);
+		params.put(FunctionCommon.TO_SIGN_HEAD+"expiryDate",expiryDate);
+
 
 		params.put("funcNo", FUNC_NO);
 		
@@ -121,13 +147,32 @@ public class Function2000377Test {
 		String result = funcCommon.invoke(params);
 		log.info("result=>"+result);
 		//解析返回数据并处理
-
+		processResult(result);
 	}
 	
-
+	/**
+	 * json结果result的解析并处理
+	 * 
+	 * @param result
+	 */
+	private void processResult(String result) {
+		 Json381 json=JSON.parseObject(result, Json381.class);
+		
+		 if("0".equals(json.getError_no())) {//系统级调用成功
+			 if(json.getResults().isEmpty()||null==json.getResults().get(0))//异常，系统级调用成功，却无结果，健壮性考虑，留此分支,联系服务端
+				 throw new IllegalStateException("异常，系统级调用成功，却无结果，健壮性考虑，留此分支,联系服务端");
+			 
+			 Result381 re=json.getResults().get(0);
+			 log.info("订单成功结束");
+			 }else {//异常，未知返回码，健壮性考虑，留此分支,联系服务端
+				 throw new IllegalStateException("异常，未知返回码,联系服务端");
+			 }
+		 }
+		
 	
 	@Test
 	public void test() throws Exception{
+
 		try {
 			doWork();
 		}catch(RuntimeException e){

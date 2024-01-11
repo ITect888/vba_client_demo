@@ -59,22 +59,22 @@ public class Function2000376Test {
 	String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
 
-	String idType = "516";
+	String idType = "";
 
 
-	String nation = "CHN";
+	String nation = "";
 
-	String idNumber = "H00000001";
+	String idNumber = "";
 
-	String expiryDate = "20291128";
+	String expiryDate = "";
 
-	String name = "张三三";
+	String name = "";
 
-	String sex = "1";
+	String sex = "";
 
-	String birthDate = "19760101";
+	String birthDate = "";
 
-	String photoData=Thread.currentThread().getContextClassLoader().getResource("").getPath()+ File.separator+"photoData.jpg";
+	String photoData=Thread.currentThread().getContextClassLoader().getResource("").getPath()+ File.separator+"30K高清案例.jpg";
 	
 	private Config config=Config.getInstance();
 	
@@ -98,7 +98,7 @@ public class Function2000376Test {
 		params.put(FunctionCommon.TO_SIGN_HEAD+"ptycd",config.getPtycd());
 		params.put(FunctionCommon.TO_SIGN_HEAD+"idType",idType);
 		params.put(FunctionCommon.TO_SIGN_HEAD+"nation",nation);
-		params.put(FunctionCommon.TO_SIGN_HEAD+"idNumber",idNumber);
+		params.put(FunctionCommon.TO_AES_TO_URL_TO_BASE64_HEAD+"idNumber",idNumber);
 		params.put(FunctionCommon.TO_SIGN_HEAD+"expiryDate",expiryDate);
 		params.put(FunctionCommon.TO_SIGN_HEAD+"name",name);
 		params.put(FunctionCommon.TO_SIGN_HEAD+"sex",sex);

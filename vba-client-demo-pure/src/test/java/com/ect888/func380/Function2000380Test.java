@@ -64,7 +64,7 @@ public class Function2000380Test {
 	 * 414：定居国外的中国公民护照，普通护照	516：港澳居民来往内地通行证		553：外国人永久居留身份证
 	 * 参与签名
 	 */
-	String idType = "516";
+	String idType = "";
 	
 	/**
 	 * 证件号码	
@@ -75,26 +75,26 @@ public class Function2000380Test {
 	 * [c],base64（[b]中字符串） 
 	 * 
 	 */
-	String idNumber="33048218872";
+	String idNumber="";
 	
 	/**
 	 * 国籍代码
 	 * 参与签名
 	 */
-	String nation = "CHN";
+	String nation = "";
 	
 	/**
 	 *
 	 * 参与签名
 	 */
-	String name = "朱冬健";
+	String name = "";
 	
 	/**
 	 * 正面人像图片路径
 	 * 需用Base64编码
 	 * 接口限制图片大小为30k，100k-1mb大小的图片将由证通进行压缩，不支持1MB以上的图片。
 	 */
-	String photoData=Thread.currentThread().getContextClassLoader().getResource("").getPath()+File.separator+"123.jpg";
+	String photoData=Thread.currentThread().getContextClassLoader().getResource("").getPath()+File.separator+"30K高清案例.jpg";
 	
 	
 	/**

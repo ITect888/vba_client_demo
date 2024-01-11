@@ -1,4 +1,15 @@
-package com.ect888.func377;
+package com.ect888.func376;
+
+import com.ect888.bus.FunctionCommon;
+import com.ect888.bus.impl.FunctionCommonImpl;
+import com.ect888.bus.impl.FunctionCommonImplV2;
+import com.ect888.config.Config;
+import com.ect888.http.PoolClient;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.PropertyConfigurator;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -6,29 +17,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.log4j.PropertyConfigurator;
-import org.junit.Before;
-import org.junit.Test;
 
-import com.alibaba.fastjson.JSON;
-import com.ect888.bus.FunctionCommon;
-import com.ect888.bus.impl.FunctionCommonImpl;
-import com.ect888.config.Config;
-import com.ect888.http.PoolClient;
-
-/**
- * 出入境身份认证
- * 
- */
-public class Function2000377Test {
+public class Function2000376EncTest {
 	
-	private static Log log = LogFactory.getLog(Function2000377Test.class);
+	private static Log log = LogFactory.getLog(Function2000376EncTest.class);
 	
-	static final String FUNC_NO="2000377";
+	static final String FUNC_NO="2000376";
 	
-
 	/**
 	 * 来源渠道，填固定值“0”
 	 * 
@@ -64,6 +59,7 @@ public class Function2000377Test {
 	 */
 	String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
+
 	String idType = "";
 
 
@@ -71,42 +67,45 @@ public class Function2000377Test {
 
 	String idNumber = "";
 
-
+	String expiryDate = "";
 
 	String name = "";
 
+	String sex = "";
 
+	String birthDate = "";
+
+	String photoData=Thread.currentThread().getContextClassLoader().getResource("").getPath()+ File.separator+"30K高清案例.jpg";
 	
 	private Config config=Config.getInstance();
 	
 	private PoolClient client=PoolClient.getInstance();
 	
-	private FunctionCommonImpl funcCommon=FunctionCommonImpl.getInstance();
+	private FunctionCommonImplV2 functionCommonImplV2= FunctionCommonImplV2.getInstance();
 	
 	/**
 	 * 
 	 *
 	 * @return 将入参，按照http post上送和签名规则，放入map内
 	 */
-	private Map<String, String> buildParams()  throws Exception{
+	private Map<String, String> buildParams() {
 		Map<String,String> params=new HashMap<String,String>();
-
 		params.put(FunctionCommon.TO_SIGN_HEAD+"timestamp", timestamp);
 		params.put(FunctionCommon.TO_SIGN_HEAD+"biztypdesc", biztypdesc);
 		params.put(FunctionCommon.TO_SIGN_HEAD+"biztyp", biztyp);
 		params.put(FunctionCommon.TO_SIGN_HEAD+"placeid", placeid);
 		params.put(FunctionCommon.TO_SIGN_HEAD+"sourcechnl", sourcechnl);
 		params.put(FunctionCommon.TO_SIGN_HEAD+"ptyacct",config.getPtyacct());
-		params.put(FunctionCommon.TO_SIGN_HEAD+"ptycd",config.getPtycd());	
-		
-		
-		params.put(FunctionCommon.TO_SIGN_HEAD+"idType",idType);
-		params.put(FunctionCommon.TO_SIGN_HEAD+"nation",nation);
-		params.put(FunctionCommon.TO_AES_TO_URL_TO_BASE64_HEAD+"idNumber", idNumber);
-		params.put(FunctionCommon.TO_SIGN_HEAD+"name",name);
-		
-
-		params.put("funcNo", FUNC_NO);
+		params.put(FunctionCommon.TO_SIGN_HEAD+"ptycd",config.getPtycd());
+		params.put(FunctionCommon.TO_AES_DATA_HEAD+"idType",idType);
+		params.put(FunctionCommon.TO_AES_DATA_HEAD+"nation",nation);
+		params.put(FunctionCommon.TO_AES_DATA_HEAD+"idNumber",idNumber);
+		params.put(FunctionCommon.TO_AES_DATA_HEAD+"expiryDate",expiryDate);
+		params.put(FunctionCommon.TO_AES_DATA_HEAD+"name",name);
+		params.put(FunctionCommon.TO_AES_DATA_HEAD+"sex",sex);
+		params.put(FunctionCommon.TO_AES_DATA_HEAD+"birthDate",birthDate);
+		params.put(FunctionCommon.TO_AES_PIC_BASE64_HEAD+"photoData", photoData);
+		params.put(FunctionCommon.TO_SIGN_HEAD+"funcNo", FUNC_NO);
 		
 		return params;
 	}
@@ -114,20 +113,23 @@ public class Function2000377Test {
 	/**
 	 * 模拟调用
 	 */
-	public void doWork()  throws Exception{
+	public void doWork(){
 			
 		Map<String, String> params=buildParams();
-		//加密加签,发起post请求，UrlEncodedFormEntity方式，选择相信服务端ssl证书，忽略证书认证
-		String result = funcCommon.invoke(params);
-		log.info("result=>"+result);
+		HashMap<String,String> header = new HashMap<>();
+		//3.0,对data节点中的数据全部加密
+		header.put("version", "3.0");
+		header.put("enc", "1");
+		//CONTENT-TYPE application/json
+		String result = functionCommonImplV2.invoke(params,header);
+		log.info(result);
 		//解析返回数据并处理
-
 	}
 	
 
 	
 	@Test
-	public void test() throws Exception{
+	public void test() {
 		try {
 			doWork();
 		}catch(RuntimeException e){
